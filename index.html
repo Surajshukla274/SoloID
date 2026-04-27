@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solo DI - The Modern Business Connection</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-dark: #12131c;
+            --bg-card: #1e1f29;
+            --primary-purple: #a624ff;
+            --secondary-purple: #c77dff;
+            --text-light: #e0e0e0;
+            --text-muted: #8a8d9e;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        /* Navbar */
+        .navbar {
+            background-color: rgba(18, 19, 28, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: #fff !important;
+        }
+        .navbar-brand i {
+            color: var(--secondary-purple);
+        }
+        .navbar-toggler {
+            border-color: rgba(255,255,255,0.1);
+        }
+        .navbar-toggler-icon {
+            filter: invert(1);
+        }
+        .nav-link {
+            color: var(--text-light) !important;
+            font-size: 0.95rem;
+            margin: 0 10px;
+            transition: color 0.3s;
+        }
+        .nav-link:hover {
+            color: var(--primary-purple) !important;
+        }
+        .btn-login {
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.2);
+            color: #fff;
+            border-radius: 20px;
+            padding: 8px 20px;
+            transition: all 0.3s;
+            width: 100%;
+            margin-top: 10px;
+        }
+        @media (min-width: 992px) {
+            .btn-login { width: auto; margin-top: 0; }
+        }
+        .btn-login:hover {
+            background: rgba(255,255,255,0.1);
+            color: #fff;
+        }
+
+        /* Buttons & Gradients */
+        .btn-gradient {
+            background: linear-gradient(90deg, var(--primary-purple), var(--secondary-purple));
+            color: #fff;
+            border: none;
+            border-radius: 30px;
+            padding: 12px 30px;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(166, 36, 255, 0.4);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .btn-gradient:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(166, 36, 255, 0.6);
+            color: #fff;
+        }
+        .text-gradient {
+            background: linear-gradient(90deg, var(--secondary-purple), #ff7eb3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            padding: 120px 0 60px;
+            text-align: center;
+            position: relative;
+        }
+        .hero-section h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        .hero-section h2 {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 40px;
+        }
+        .hero-mockup-area {
+            position: relative;
+            height: 350px;
+            margin: 40px auto;
+            background: radial-gradient(circle, rgba(166,36,255,0.15) 0%, rgba(18,19,28,0) 60%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        /* Mockup Images CSS */
+        .mockup-card-img {
+            width: 300px;
+            height: 180px;
+            object-fit: cover; /* Image ko area me fit karne ke liye */
+            
+            transform: rotate(-15deg);
+            
+            position: absolute;
+            left: 50%;
+            margin-left: -250px;
+            z-index: 1;
+            background-color: #2a2a2a; /* Fallback color jab tak image load na ho */
+        }
+        
+        .mockup-phone-img {
+            width: 180px;
+            height: 380px;
+            object-fit: cover;
+           
+            
+            position: absolute;
+            left: 50%;
+            margin-left: 50px;
+           
+            z-index: 2;
+           
+        }
+
+        /* How It Works */
+        .how-it-works {
+            padding: 60px 0;
+            background-color: #1a1b24;
+            text-align: center;
+        }
+        .step-icon {
+            font-size: 2.5rem;
+            color: var(--secondary-purple);
+            margin-bottom: 15px;
+        }
+        .step-arrow {
+            font-size: 1.5rem;
+            color: var(--text-muted);
+            line-height: 100px;
+        }
+
+        /* Common Section Styles */
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .section-title p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            text-transform: none;
+            margin-top: 10px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Custom Design Services */
+        .services-section {
+            padding: 80px 0;
+        }
+        .service-card {
+            background-color: var(--bg-card);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s;
+            height: calc(100% - 20px);
+        }
+        .service-card:hover {
+            border-color: var(--primary-purple);
+            box-shadow: 0 5px 15px rgba(166, 36, 255, 0.1);
+            transform: translateY(-3px);
+        }
+        .service-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(166, 36, 255, 0.1);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--secondary-purple);
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        .service-info h5 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        .service-info p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 0;
+        }
+
+        /* Pricing */
+        .pricing-section {
+            padding: 80px 0;
+            background-color: #1a1b24;
+        }
+        .pricing-card {
+            background-color: var(--bg-card);
+            border-radius: 15px;
+            padding: 40px 30px;
+            height: 100%;
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: transform 0.3s;
+        }
+        .pricing-card:hover {
+            transform: translateY(-5px);
+        }
+        .pricing-card.popular {
+            border: 1px solid var(--primary-purple);
+            box-shadow: 0 10px 30px rgba(166, 36, 255, 0.15);
+        }
+        .pricing-header {
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+        }
+        .price {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #fff;
+        }
+        .price span {
+            font-size: 1rem;
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+        .pricing-features {
+            padding-left: 0;
+            list-style: none;
+        }
+        .pricing-features li {
+            margin-bottom: 12px;
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+        .pricing-features li i {
+            color: var(--secondary-purple);
+            margin-right: 10px;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: #0f1016;
+            padding: 60px 0 20px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+        .footer h6 {
+            color: #fff;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        .footer p, .footer a {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            text-decoration: none;
+        }
+        .footer a:hover {
+            color: var(--secondary-purple);
+        }
+        .social-icons a {
+            color: var(--text-light);
+            font-size: 1.2rem;
+            margin-right: 15px;
+            transition: color 0.3s;
+        }
+        .social-icons a:hover {
+            color: var(--primary-purple);
+        }
+
+        /* ========================================= */
+        /* RESPONSIVE MEDIA QUERIES                  */
+        /* ========================================= */
+
+        @media (max-width: 991px) {
+            .hero-section h1 { font-size: 2.5rem; }
+            .hero-section h2 { font-size: 1.7rem; }
+            .navbar-collapse {
+                background: var(--bg-card);
+                padding: 15px;
+                border-radius: 10px;
+                margin-top: 10px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-section { padding: 100px 15px 40px; }
+            .hero-section h1 { font-size: 2rem; }
+            .hero-section h2 { font-size: 1.3rem; }
+            
+            /* Mobile sizes for images */
+            .hero-mockup-area { height: 250px; margin: 20px auto; }
+            .mockup-card-img { width: 220px; height: 130px; margin-left: -150px; }
+            .mockup-phone-img { width: 130px; height: 250px; margin-left: 20px; }
+
+            .step-arrow { display: none; }
+            .step-box { margin-bottom: 30px; }
+            
+            .services-section, .pricing-section, .how-it-works, .footer { padding: 50px 0; }
+        }
+
+        @media (max-width: 480px) {
+            .hero-section h1 { font-size: 1.75rem; }
+            .hero-section h2 { font-size: 1.1rem; }
+            
+            /* Extra small mobile sizes for images */
+            .hero-mockup-area { height: 200px; }
+            .mockup-card-img { width: 180px; height: 110px; margin-left: -110px; }
+            .mockup-phone-img { width: 100px; height: 200px; margin-left: 10px; }
+
+            .price { font-size: 2rem; }
+            .pricing-card { padding: 30px 20px; }
+            
+            .footer { text-align: center; }
+            .social-icons { justify-content: center; display: flex; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="bi bi-hexagon-fill"></i> Solo DI
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                <ul class="navbar-nav text-center">
+                    <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#how-it-works">How It Works</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#services">NFC Services</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#pricing">Pricing</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                </ul>
+               
+            </div>
+            
+        </div>
+    </nav>
+
+    <section class="hero-section">
+        <div class="container">
+            <h1 class="text-gradient">YOUR BRAND, INSTANTLY.</h1>
+            <h2>Solo DI: The Modern Business Connection.</h2>
+            
+            <div class="hero-mockup-area">
+                
+                <img src="/Card.png" alt="NFC Card" class="mockup-card-img">
+                
+                <img src="/phone.png" alt="App Profile" class="mockup-phone-img">
+                
+            </div>
+
+            <p class="text-light mb-4 mx-auto" style="max-width: 600px; font-size: 1rem;">
+                Tapped, not just given. A single touch with our custom NFC card instantly shares your tailored web profile. Designed for modern professionals.
+            </p>
+            
+        </div>
+    </section>
+
+    <section id="how-it-works" class="how-it-works">
+        <div class="container">
+            <div class="section-title">
+                <h3>HOW IT WORKS</h3>
+            </div>
+            <div class="row align-items-center">
+                <div class="col-md-3 step-box">
+                    <i class="bi bi-layout-text-window step-icon"></i>
+                    <h5 class="mt-3">Design Web Page</h5>
+                </div>
+                <div class="col-md-1 text-center d-none d-md-block">
+                    <i class="bi bi-arrow-right step-arrow"></i>
+                </div>
+                <div class="col-md-4 step-box">
+                    <i class="bi bi-phone-vibrate step-icon"></i>
+                    <h5 class="mt-3">Tap Phone (NFC)</h5>
+                </div>
+                <div class="col-md-1 text-center d-none d-md-block">
+                    <i class="bi bi-arrow-right step-arrow"></i>
+                </div>
+                <div class="col-md-3 step-box">
+                    <i class="bi bi-broadcast step-icon"></i>
+                    <h5 class="mt-3">Connect Instantly</h5>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="services-section">
+        <div class="container">
+            <div class="section-title">
+                <h3>CUSTOM NFC PROFILE DESIGN</h3>
+                <p>We build a personalized web page tailored to your client's exact needs. Connected seamlessly to your physical NFC card for instant sharing.</p>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="service-card">
+                        <div class="service-icon"><i class="bi bi-brush"></i></div>
+                        <div class="service-info">
+                            <h5>TAILORED UI/UX DESIGN</h5>
+                            <p>Beautiful, customized web page layouts designed specifically to match the client's brand and profession.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="service-card">
+                        <div class="service-icon"><i class="bi bi-person-lines-fill"></i></div>
+                        <div class="service-info">
+                            <h5>ONE-TAP CONTACT SAVE</h5>
+                            <p>Direct VCF file integration so users can save your details straight to their phonebook with a single tap.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="service-card">
+                        <div class="service-icon"><i class="bi bi-link-45deg"></i></div>
+                        <div class="service-info">
+                            <h5>CENTRALIZED SOCIAL HUB</h5>
+                            <p>All your important links, portfolios, and social media profiles organized cleanly on one digital page.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="service-card">
+                        <div class="service-icon"><i class="bi bi-ui-checks"></i></div>
+                        <div class="service-info">
+                            <h5>LEAD CAPTURE FORMS</h5>
+                            <p>Built-in contact forms on the web page to collect inquiries directly from the people you network with.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="service-card">
+                        <div class="service-icon"><i class="bi bi-qr-code-scan"></i></div>
+                        <div class="service-info">
+                            <h5>CUSTOM QR INTEGRATION</h5>
+                            <p>Dynamic QR codes embedded on the card and web profile as a backup for non-NFC compatible smartphones.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="service-card">
+                        <div class="service-icon"><i class="bi bi-graph-up-arrow"></i></div>
+                        <div class="service-info">
+                            <h5>REAL-TIME ANALYTICS</h5>
+                            <p>Track your web page views, NFC tap counts, and link clicks to measure your networking performance.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="pricing" class="pricing-section">
+        <div class="container">
+            <div class="section-title">
+                <h3>AFFORDABLE PRICING PLANS</h3>
+            </div>
+            
+            <div class="row justify-content-center gap-4 gap-lg-0">
+                <div class="col-md-8 col-lg-4 mb-4 mb-lg-0">
+                    <div class="pricing-card popular" style="background: linear-gradient(180deg, rgba(166,36,255,0.2) 0%, rgba(30,31,41,1) 40%);">
+                        <div class="pricing-header">
+                            <h5 class="text-light">Starter Solo</h5>
+                            <div class="price">₹399<span>/month</span></div>
+                        </div>
+                        <ul class="pricing-features list-unstyled">
+                            <li><i class="bi bi-check-circle-fill"></i> Physical NFC Card</li>
+                            <li><i class="bi bi-check-circle-fill"></i> Basic Web Profile</li>
+                            <li><i class="bi bi-check-circle-fill"></i> 5 Link Integrations</li>
+                            <li><i class="bi bi-check-circle-fill"></i> Standard Design</li>
+                        </ul>
+                        <button class="btn btn-gradient w-100 mt-4">Get Started</button>
+                    </div>
+                </div>
+
+                <div class="col-md-8 col-lg-4">
+                    <div class="pricing-card">
+                        <div class="pricing-header">
+                            <h5 class="text-light">Premium Pro</h5>
+                            <div class="price">₹699<span>/month</span></div>
+                        </div>
+                        <ul class="pricing-features list-unstyled">
+                            <li><i class="bi bi-check-circle-fill"></i> All Solo Features</li>
+                            <li><i class="bi bi-check-circle-fill"></i> Custom Coded Web Page</li>
+                            <li><i class="bi bi-check-circle-fill"></i> Tap Analytics Panel</li>
+                            <li><i class="bi bi-check-circle-fill"></i> Lead Capture Forms</li>
+                        </ul>
+                        <button class="btn btn-outline-light w-100 mt-4" style="border-color: var(--primary-purple); color: var(--secondary-purple);">Get Premium</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="about" class="footer">
+        <div class="container">
+            <div class="row text-center text-md-start">
+                <div class="col-lg-4 mb-4">
+                    <a class="navbar-brand d-block mb-3" href="#">
+                        <i class="bi bi-hexagon-fill"></i> Solo DI
+                    </a>
+                    <p>Market your business with every single tap.<br>Custom NFC & Digital Profile Solutions.</p>
+                </div>
+                <div class="col-lg-2 col-md-4 mb-4">
+                    <h6>Links</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#how-it-works">How It Works</a></li>
+                        <li><a href="#services">NFC Services</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-4 mb-4">
+                    <h6>Company</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Social Media</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 col-md-4 mb-4">
+                    <h6>Contact</h6>
+                    <ul class="list-unstyled text-muted">
+                        <li class="mb-2" style="color: #ffffff;"><i class="bi bi-envelope me-2" ></i> shivankshukla1k@gmail.com</li>
+                        <li class="mb-2" style="color: #ffffff;"><i class="bi bi-telephone me-2"></i> +91 7897055511</li>
+                        
+                    </ul>
+                    <div class="social-icons mt-3">
+                        <a href="#"><i class="bi bi-facebook"></i></a>
+                        <a href="#"><i class="bi bi-twitter-x"></i></a>
+                        <a href="#"><i class="bi bi-instagram"></i></a>
+                        <a href="#"><i class="bi bi-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
