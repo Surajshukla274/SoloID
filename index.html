@@ -388,4 +388,121 @@
   <!-- Digital Menus page -->
   <div id="service-menus" class="service-detail-page container py-4">
     <div class="mb-4"><button class="back-home-btn"><i class="fas fa-arrow-left me-2"></i>Back to Home</button></div>
-    <div class="text-center"><h1 class="display-5 fw-bold">Digital 
+    <div class="text-center"><h1 class="display-5 fw-bold">Digital Menus: <span class="text-info">Interactive Ordering Experience.</span></h1><p>NFC & QR based smart menus with real-time updates and analytics.</p><button class="btn btn-cyber">Launch Digital Menu</button></div>
+    <div class="row g-4 mt-4"><div class="col-md-4"><div class="glass-card p-3"><i class="fas fa-qrcode text-info"></i><h5>QR/NFC Access</h5><p>Tap or scan, menu instantly loads.</p></div></div><div class="col-md-4"><div class="glass-card p-3"><i class="fas fa-sync-alt text-info"></i><h5>Live Updates</h5><p>Change prices/items remotely.</p></div></div><div class="col-md-4"><div class="glass-card p-3"><i class="fas fa-chart-simple text-info"></i><h5>Analytics Dashboard</h5><p>Track popular items & engagement.</p></div></div></div>
+    <div class="mt-5"><div class="glass-card p-3 d-flex gap-3"><i class="fas fa-store fs-1 text-info"></i><div><h5>Case Study: City Bistro</h5><p>+34% repeat orders after digital menu integration, reduced wait time.</p></div></div></div>
+  </div>
+</div>
+
+<!-- GLOBAL FOOTER -->
+<footer class="footer mt-5 py-5">
+  <div class="container">
+    <div class="row gy-4">
+      <div class="col-md-5"><h4 class="fw-bold"><i class="fas fa-meteor me-2"></i>A.S. Creative House</h4><p class="small text-secondary">Turning physical interactions into digital relationships — innovative solutions for modern brands.</p><div class="d-flex gap-3 fs-5 mt-3"><a href="#" class="text-info link-glow"><i class="fab fa-instagram"></i></a><a href="#" class="text-info"><i class="fab fa-twitter"></i></a><a href="#" class="text-info"><i class="fab fa-linkedin-in"></i></a><a href="#" class="text-info"><i class="fab fa-youtube"></i></a></div></div>
+      <div class="col-md-3"><h5>Quick Links</h5><ul class="list-unstyled"><li><a href="#" class="text-secondary text-decoration-none nav-footer">Contact</a></li><li><a href="#" class="text-secondary text-decoration-none">Portfolio</a></li><li><a href="#" class="text-secondary text-decoration-none">Privacy Policy</a></li><li><a href="#" class="text-secondary text-decoration-none">Terms of Service</a></li></ul></div>
+      <div class="col-md-4"><h5>Connect</h5><p class="small">hello@ascreative.com</p><p class="small">© 2024 A.S. Creative House. All rights reserved.</p></div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  // DOM elements
+  const homeContainer = document.getElementById('homePageContainer');
+  const servicesWrapper = document.getElementById('servicesDetailWrapper');
+  const allServicePages = document.querySelectorAll('.service-detail-page');
+  const backBtns = document.querySelectorAll('.back-home-btn');
+  const serviceTriggers = document.querySelectorAll('.service-trigger');
+  const getStartedBtn = document.getElementById('getStartedBtn');
+  const navHome = document.getElementById('navHome');
+  const homeNavBtn = document.getElementById('homeNavBtn');
+  const navServices = document.getElementById('navServices');
+
+  function showHome() {
+    homeContainer.style.display = 'block';
+    servicesWrapper.style.display = 'none';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function showService(serviceId) {
+    // hide home, show wrapper
+    homeContainer.style.display = 'none';
+    servicesWrapper.style.display = 'block';
+    // hide all detail pages
+    allServicePages.forEach(page => page.style.display = 'none');
+    const targetPage = document.getElementById(`service-${serviceId}`);
+    if (targetPage) targetPage.style.display = 'block';
+    else console.warn('service not found');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // attach triggers for each service card
+  serviceTriggers.forEach(card => {
+    card.addEventListener('click', (e) => {
+      const service = card.getAttribute('data-service');
+      if (service) showService(service);
+    });
+  });
+
+  backBtns.forEach(btn => {
+    btn.addEventListener('click', showHome);
+  });
+
+  // get started scrolls to services section if home visible
+  getStartedBtn.addEventListener('click', () => {
+    if (homeContainer.style.display !== 'none') {
+      document.getElementById('servicesMainSection').scrollIntoView({ behavior: 'smooth' });
+    } else {
+      showHome();
+      setTimeout(()=> document.getElementById('servicesMainSection').scrollIntoView({ behavior: 'smooth' }), 100);
+    }
+  });
+
+  navHome.addEventListener('click', (e) => { e.preventDefault(); showHome(); });
+  homeNavBtn.addEventListener('click', (e) => { e.preventDefault(); showHome(); });
+  navServices.addEventListener('click', (e) => {
+    e.preventDefault();
+    if (homeContainer.style.display === 'none') showHome();
+    setTimeout(() => document.getElementById('servicesMainSection').scrollIntoView({ behavior: 'smooth' }), 80);
+  });
+  document.getElementById('navContact')?.addEventListener('click', (e) => {
+    e.preventDefault();
+    if (homeContainer.style.display === 'none') showHome();
+    setTimeout(() => document.querySelector('footer').scrollIntoView({ behavior: 'smooth' }), 80);
+  });
+
+  // init visibility
+  showHome();
+  // extra: add Intersection Observer scroll animations (fade-in)
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting) entry.target.classList.add('show');
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.service-card, .benefit-card, .glass-card').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    observer.observe(el);
+  });
+  window.addEventListener('load', () => {
+    document.querySelectorAll('.service-card, .benefit-card, .glass-card').forEach(el => {
+      if (el.getBoundingClientRect().top < window.innerHeight) {
+        el.style.opacity = '1';
+        el.style.transform = 'translateY(0)';
+      }
+    });
+  });
+  const obsCallback = (entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  };
+  const newObserver = new IntersectionObserver(obsCallback, { threshold: 0.1 });
+  document.querySelectorAll('.service-card, .benefit-card, .glass-card').forEach(el => newObserver.observe(el));
+</script>
+</body>
+</html>
