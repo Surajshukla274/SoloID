@@ -1,583 +1,391 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Solo DI - The Modern Business Connection</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-    
-    <style>
-        :root {
-            --bg-dark: #12131c;
-            --bg-card: #1e1f29;
-            --primary-purple: #a624ff;
-            --secondary-purple: #c77dff;
-            --text-light: #e0e0e0;
-            --text-muted: #8a8d9e;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>A.S. Creative | Digital Relationships</title>
+  <!-- Bootstrap 5 + Icons + Fonts -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg-dark);
-            color: #ffffff;
-            overflow-x: hidden;
-        }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: radial-gradient(circle at 10% 20%, #030712, #000000);
+      color: #f1f5f9;
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
 
-        /* Navbar */
-        .navbar {
-            background-color: rgba(18, 19, 28, 0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-        .navbar-brand {
-            font-weight: 700;
-            font-size: 1.5rem;
-            color: #fff !important;
-        }
-        .navbar-brand i {
-            color: var(--secondary-purple);
-        }
-        .navbar-toggler {
-            border-color: rgba(255,255,255,0.1);
-        }
-        .navbar-toggler-icon {
-            filter: invert(1);
-        }
-        .nav-link {
-            color: var(--text-light) !important;
-            font-size: 0.95rem;
-            margin: 0 10px;
-            transition: color 0.3s;
-        }
-        .nav-link:hover {
-            color: var(--primary-purple) !important;
-        }
-        .btn-login {
-            background: transparent;
-            border: 1px solid rgba(255,255,255,0.2);
-            color: #fff;
-            border-radius: 20px;
-            padding: 8px 20px;
-            transition: all 0.3s;
-            width: 100%;
-            margin-top: 10px;
-        }
-        @media (min-width: 992px) {
-            .btn-login { width: auto; margin-top: 0; }
-        }
-        .btn-login:hover {
-            background: rgba(255,255,255,0.1);
-            color: #fff;
-        }
+    /* neon glow & glassmorphism */
+    .glass-card, .service-card, .benefit-card, .portfolio-item, .stat-card {
+      background: rgba(15, 25, 35, 0.65);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(0, 255, 255, 0.2);
+      border-radius: 20px;
+      transition: all 0.3s ease;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+    }
 
-        /* Buttons & Gradients */
-        .btn-gradient {
-            background: linear-gradient(90deg, var(--primary-purple), var(--secondary-purple));
-            color: #fff;
-            border: none;
-            border-radius: 30px;
-            padding: 12px 30px;
-            font-weight: 600;
-            box-shadow: 0 4px 15px rgba(166, 36, 255, 0.4);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-        .btn-gradient:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(166, 36, 255, 0.6);
-            color: #fff;
-        }
-        .text-gradient {
-            background: linear-gradient(90deg, var(--secondary-purple), #ff7eb3);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
+    .glass-card:hover, .service-card:hover, .benefit-card:hover {
+      border-color: #0ff;
+      box-shadow: 0 0 18px rgba(0, 255, 255, 0.3);
+      transform: translateY(-6px);
+    }
 
-        /* Hero Section */
-        .hero-section {
-            padding: 120px 0 60px;
-            text-align: center;
-            position: relative;
-        }
-        .hero-section h1 {
-            font-size: 3rem;
-            font-weight: 700;
-            margin-bottom: 10px;
-        }
-        .hero-section h2 {
-            font-size: 2rem;
-            font-weight: 600;
-            margin-bottom: 40px;
-        }
-        .hero-mockup-area {
-            position: relative;
-            height: 350px;
-            margin: 40px auto;
-            background: radial-gradient(circle, rgba(166,36,255,0.15) 0%, rgba(18,19,28,0) 60%);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        
-        /* Mockup Images CSS */
-        .mockup-card-img {
-            width: 300px;
-            height: 180px;
-            object-fit: cover; /* Image ko area me fit karne ke liye */
-            
-            transform: rotate(-15deg);
-            
-            position: absolute;
-            left: 50%;
-            margin-left: -250px;
-            z-index: 1;
-            background-color: #2a2a2a; /* Fallback color jab tak image load na ho */
-        }
-        
-        .mockup-phone-img {
-            width: 180px;
-            height: 380px;
-            object-fit: cover;
-           
-            
-            position: absolute;
-            left: 50%;
-            margin-left: 50px;
-           
-            z-index: 2;
-           
-        }
+    .btn-cyber {
+      background: linear-gradient(95deg, #0ff0c0, #0af);
+      border: none;
+      color: #0a0f1a;
+      font-weight: 700;
+      padding: 12px 28px;
+      border-radius: 40px;
+      transition: all 0.2s;
+      box-shadow: 0 0 8px #0ff7;
+    }
+    .btn-cyber:hover {
+      transform: scale(1.02);
+      background: linear-gradient(95deg, #0ff, #0cf);
+      box-shadow: 0 0 20px #0ff;
+      color: #000;
+    }
+    .btn-outline-neon {
+      border: 1px solid #0ff;
+      background: transparent;
+      color: #0ff;
+      border-radius: 40px;
+      padding: 10px 24px;
+      font-weight: 600;
+      transition: 0.2s;
+    }
+    .btn-outline-neon:hover {
+      background: #0ff22a;
+      color: #000;
+      box-shadow: 0 0 12px cyan;
+    }
 
-        /* How It Works */
-        .how-it-works {
-            padding: 60px 0;
-            background-color: #1a1b24;
-            text-align: center;
-        }
-        .step-icon {
-            font-size: 2.5rem;
-            color: var(--secondary-purple);
-            margin-bottom: 15px;
-        }
-        .step-arrow {
-            font-size: 1.5rem;
-            color: var(--text-muted);
-            line-height: 100px;
-        }
+    h1, h2, h3 {
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+    .hero-glow {
+      text-shadow: 0 0 12px rgba(0, 255, 255, 0.6);
+    }
+    .navbar {
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(0, 255, 255, 0.2);
+    }
+    .navbar-brand {
+      font-weight: 800;
+      font-size: 1.7rem;
+      background: linear-gradient(135deg, #fff, #0ff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .nav-link {
+      color: #e2e8f0;
+      font-weight: 500;
+      transition: 0.2s;
+    }
+    .nav-link:hover {
+      color: #0ff;
+      text-shadow: 0 0 4px cyan;
+    }
 
-        /* Common Section Styles */
-        .section-title {
-            text-align: center;
-            margin-bottom: 50px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        .section-title p {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-            text-transform: none;
-            margin-top: 10px;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-        }
+    /* background animated network lines (abstract) */
+    .bg-lines {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.2;
+      background-image: radial-gradient(circle at 20% 30%, rgba(0,255,255,0.1) 1px, transparent 1px);
+      background-size: 40px 40px;
+      animation: subtleMove 30s linear infinite;
+    }
+    @keyframes subtleMove {
+      0% { background-position: 0 0; }
+      100% { background-position: 80px 80px; }
+    }
 
-        /* Custom Design Services */
-        .services-section {
-            padding: 80px 0;
-        }
-        .service-card {
-            background-color: var(--bg-card);
-            border: 1px solid rgba(255,255,255,0.05);
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            transition: all 0.3s;
-            height: calc(100% - 20px);
-        }
-        .service-card:hover {
-            border-color: var(--primary-purple);
-            box-shadow: 0 5px 15px rgba(166, 36, 255, 0.1);
-            transform: translateY(-3px);
-        }
-        .service-icon {
-            width: 50px;
-            height: 50px;
-            background: rgba(166, 36, 255, 0.1);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            color: var(--secondary-purple);
-            margin-right: 15px;
-            flex-shrink: 0;
-        }
-        .service-info h5 {
-            font-size: 1rem;
-            font-weight: 600;
-            margin-bottom: 5px;
-        }
-        .service-info p {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            margin-bottom: 0;
-        }
+    .service-card, .benefit-card {
+      cursor: pointer;
+      height: 100%;
+      padding: 1.5rem;
+      transition: all 0.25s;
+    }
+    .service-icon {
+      font-size: 2.5rem;
+      color: #0ff;
+      margin-bottom: 1rem;
+    }
 
-        /* Pricing */
-        .pricing-section {
-            padding: 80px 0;
-            background-color: #1a1b24;
-        }
-        .pricing-card {
-            background-color: var(--bg-card);
-            border-radius: 15px;
-            padding: 40px 30px;
-            height: 100%;
-            border: 1px solid rgba(255,255,255,0.05);
-            transition: transform 0.3s;
-        }
-        .pricing-card:hover {
-            transform: translateY(-5px);
-        }
-        .pricing-card.popular {
-            border: 1px solid var(--primary-purple);
-            box-shadow: 0 10px 30px rgba(166, 36, 255, 0.15);
-        }
-        .pricing-header {
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            padding-bottom: 20px;
-            margin-bottom: 20px;
-        }
-        .price {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: #fff;
-        }
-        .price span {
-            font-size: 1rem;
-            color: var(--text-muted);
-            font-weight: 400;
-        }
-        .pricing-features {
-            padding-left: 0;
-            list-style: none;
-        }
-        .pricing-features li {
-            margin-bottom: 12px;
-            font-size: 0.9rem;
-            color: var(--text-light);
-        }
-        .pricing-features li i {
-            color: var(--secondary-purple);
-            margin-right: 10px;
-        }
+    /* image hover zoom */
+    .zoom-img {
+      transition: transform 0.4s ease;
+      border-radius: 16px;
+      overflow: hidden;
+    }
+    .zoom-img:hover {
+      transform: scale(1.02);
+    }
 
-        /* Footer */
-        .footer {
-            background-color: #0f1016;
-            padding: 60px 0 20px;
-            border-top: 1px solid rgba(255,255,255,0.05);
-        }
-        .footer h6 {
-            color: #fff;
-            font-weight: 600;
-            margin-bottom: 20px;
-        }
-        .footer p, .footer a {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            text-decoration: none;
-        }
-        .footer a:hover {
-            color: var(--secondary-purple);
-        }
-        .social-icons a {
-            color: var(--text-light);
-            font-size: 1.2rem;
-            margin-right: 15px;
-            transition: color 0.3s;
-        }
-        .social-icons a:hover {
-            color: var(--primary-purple);
-        }
+    /* footer */
+    .footer {
+      background: #03070fcc;
+      backdrop-filter: blur(8px);
+      border-top: 1px solid rgba(0,255,255,0.2);
+    }
 
-        /* ========================================= */
-        /* RESPONSIVE MEDIA QUERIES                  */
-        /* ========================================= */
+    .section-title {
+      position: relative;
+      display: inline-block;
+      margin-bottom: 2rem;
+    }
+    .section-title:after {
+      content: '';
+      position: absolute;
+      bottom: -12px;
+      left: 0;
+      width: 60%;
+      height: 3px;
+      background: linear-gradient(90deg, #0ff, transparent);
+    }
 
-        @media (max-width: 991px) {
-            .hero-section h1 { font-size: 2.5rem; }
-            .hero-section h2 { font-size: 1.7rem; }
-            .navbar-collapse {
-                background: var(--bg-card);
-                padding: 15px;
-                border-radius: 10px;
-                margin-top: 10px;
-            }
-        }
+    /* mobile first adjustments */
+    @media (max-width: 768px) {
+      .hero-display {
+        font-size: 2.4rem;
+      }
+      .btn-cyber {
+        padding: 10px 20px;
+      }
+    }
 
-        @media (max-width: 768px) {
-            .hero-section { padding: 100px 15px 40px; }
-            .hero-section h1 { font-size: 2rem; }
-            .hero-section h2 { font-size: 1.3rem; }
-            
-            /* Mobile sizes for images */
-            .hero-mockup-area { height: 250px; margin: 20px auto; }
-            .mockup-card-img { width: 220px; height: 130px; margin-left: -150px; }
-            .mockup-phone-img { width: 130px; height: 250px; margin-left: 20px; }
-
-            .step-arrow { display: none; }
-            .step-box { margin-bottom: 30px; }
-            
-            .services-section, .pricing-section, .how-it-works, .footer { padding: 50px 0; }
-        }
-
-        @media (max-width: 480px) {
-            .hero-section h1 { font-size: 1.75rem; }
-            .hero-section h2 { font-size: 1.1rem; }
-            
-            /* Extra small mobile sizes for images */
-            .hero-mockup-area { height: 200px; }
-            .mockup-card-img { width: 180px; height: 110px; margin-left: -110px; }
-            .mockup-phone-img { width: 100px; height: 200px; margin-left: 10px; }
-
-            .price { font-size: 2rem; }
-            .pricing-card { padding: 30px 20px; }
-            
-            .footer { text-align: center; }
-            .social-icons { justify-content: center; display: flex; }
-        }
-    </style>
+    .stats-number {
+      font-size: 2rem;
+      font-weight: 800;
+      color: #0ff;
+    }
+    .back-home-btn {
+      background: none;
+      border: 1px solid #0ff;
+      color: #0ff;
+      border-radius: 40px;
+      padding: 8px 20px;
+      transition: 0.2s;
+    }
+    .back-home-btn:hover {
+      background: #0ff;
+      color: black;
+    }
+    .service-detail-page {
+      animation: fadeSlideUp 0.5s ease;
+    }
+    @keyframes fadeSlideUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
 </head>
 <body>
 
-    <nav class="navbar navbar-expand-lg fixed-top">
-        <div class="container">
-            <a class="navbar-brand" href="#">
-                <i class="bi bi-hexagon-fill"></i> Solo DI
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
-                <ul class="navbar-nav text-center">
-                    <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#how-it-works">How It Works</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#services">NFC Services</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#pricing">Pricing</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-                </ul>
-               
-            </div>
-            
+<div class="bg-lines"></div>
+
+<!-- Sticky Navbar -->
+<nav class="navbar navbar-expand-lg sticky-top py-3">
+  <div class="container">
+    <a class="navbar-brand" href="#" id="homeNavBtn"><i class="fas fa-meteor me-2"></i>A.S. Creative</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"><i class="fas fa-bars text-white"></i></span>
+    </button>
+    <div class="collapse navbar-collapse" id="mainNav">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0 gap-3">
+        <li class="nav-item"><a class="nav-link" href="#" id="navHome">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="#" id="navServices">Services</a></li>
+        <li class="nav-item"><a class="nav-link" href="#" id="navContact">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- MAIN HOME PAGE SECTION -->
+<div id="homePageContainer">
+  <!-- Hero Section -->
+  <section class="container pt-5 mt-3">
+    <div class="row align-items-center min-vh-50 py-5">
+      <div class="col-lg-8 mx-auto text-center">
+        <h1 class="display-3 fw-bold hero-glow mb-4">Turning Physical Interactions Into <span style="color:#0ff;">Digital Relationships.</span></h1>
+        <p class="lead fs-4 text-light-emphasis mb-4">One partner. Every digital need.</p>
+        <button class="btn btn-cyber btn-lg" id="getStartedBtn">Get Started <i class="fas fa-arrow-right ms-2"></i></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Section Grid -->
+  <section class="container py-5" id="servicesMainSection">
+    <div class="text-center mb-5">
+      <h2 class="section-title">Our Digital Solutions</h2>
+      <p class="text-secondary">Click any card to explore full service experience</p>
+    </div>
+    <div class="row g-4">
+      <!-- 6 Service Cards -->
+      <div class="col-md-6 col-lg-4">
+        <div class="service-card text-center service-trigger" data-service="nfc">
+          <i class="fas fa-id-card service-icon"></i>
+          <h4>NFC Business Cards</h4>
+          <p>Tap & share contact details, socials, real-time updates.</p>
         </div>
-    </nav>
-
-    <section class="hero-section">
-        <div class="container">
-            <h1 class="text-gradient">YOUR BRAND, INSTANTLY.</h1>
-            <h2>Solo DI: The Modern Business Connection.</h2>
-            
-            <div class="hero-mockup-area">
-                
-                <img src="Card.png" alt="NFC Card" class="mockup-card-img">
-                
-                <img src="phone.png" alt="App Profile" class="mockup-phone-img">
-                
-            </div>
-
-            <p class="text-light mb-4 mx-auto" style="max-width: 600px; font-size: 1rem;">
-                Tapped, not just given. A single touch with our custom NFC card instantly shares your tailored web profile. Designed for modern professionals.
-            </p>
-            
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="service-card text-center service-trigger" data-service="web">
+          <i class="fas fa-code service-icon"></i>
+          <h4>Web Development</h4>
+          <p>Custom, blazing-fast websites & web apps.</p>
         </div>
-    </section>
-
-    <section id="how-it-works" class="how-it-works">
-        <div class="container">
-            <div class="section-title">
-                <h3>HOW IT WORKS</h3>
-            </div>
-            <div class="row align-items-center">
-                <div class="col-md-3 step-box">
-                    <i class="bi bi-layout-text-window step-icon"></i>
-                    <h5 class="mt-3">Design Web Page</h5>
-                </div>
-                <div class="col-md-1 text-center d-none d-md-block">
-                    <i class="bi bi-arrow-right step-arrow"></i>
-                </div>
-                <div class="col-md-4 step-box">
-                    <i class="bi bi-phone-vibrate step-icon"></i>
-                    <h5 class="mt-3">Tap Phone (NFC)</h5>
-                </div>
-                <div class="col-md-1 text-center d-none d-md-block">
-                    <i class="bi bi-arrow-right step-arrow"></i>
-                </div>
-                <div class="col-md-3 step-box">
-                    <i class="bi bi-broadcast step-icon"></i>
-                    <h5 class="mt-3">Connect Instantly</h5>
-                </div>
-            </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="service-card text-center service-trigger" data-service="gbp">
+          <i class="fab fa-google service-icon"></i>
+          <h4>Google Business Profile</h4>
+          <p>Dominate local search, manage reviews & insights.</p>
         </div>
-    </section>
-
-    <section id="services" class="services-section">
-        <div class="container">
-            <div class="section-title">
-                <h3>CUSTOM NFC PROFILE DESIGN</h3>
-                <p>We build a personalized web page tailored to your client's exact needs. Connected seamlessly to your physical NFC card for instant sharing.</p>
-            </div>
-            
-            <div class="row">
-                <div class="col-lg-4 col-md-6">
-                    <div class="service-card">
-                        <div class="service-icon"><i class="bi bi-brush"></i></div>
-                        <div class="service-info">
-                            <h5>TAILORED UI/UX DESIGN</h5>
-                            <p>Beautiful, customized web page layouts designed specifically to match the client's brand and profession.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="service-card">
-                        <div class="service-icon"><i class="bi bi-person-lines-fill"></i></div>
-                        <div class="service-info">
-                            <h5>ONE-TAP CONTACT SAVE</h5>
-                            <p>Direct VCF file integration so users can save your details straight to their phonebook with a single tap.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="service-card">
-                        <div class="service-icon"><i class="bi bi-link-45deg"></i></div>
-                        <div class="service-info">
-                            <h5>CENTRALIZED SOCIAL HUB</h5>
-                            <p>All your important links, portfolios, and social media profiles organized cleanly on one digital page.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="service-card">
-                        <div class="service-icon"><i class="bi bi-ui-checks"></i></div>
-                        <div class="service-info">
-                            <h5>LEAD CAPTURE FORMS</h5>
-                            <p>Built-in contact forms on the web page to collect inquiries directly from the people you network with.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="service-card">
-                        <div class="service-icon"><i class="bi bi-qr-code-scan"></i></div>
-                        <div class="service-info">
-                            <h5>CUSTOM QR INTEGRATION</h5>
-                            <p>Dynamic QR codes embedded on the card and web profile as a backup for non-NFC compatible smartphones.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="service-card">
-                        <div class="service-icon"><i class="bi bi-graph-up-arrow"></i></div>
-                        <div class="service-info">
-                            <h5>REAL-TIME ANALYTICS</h5>
-                            <p>Track your web page views, NFC tap counts, and link clicks to measure your networking performance.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="service-card text-center service-trigger" data-service="menus">
+          <i class="fas fa-utensils service-icon"></i>
+          <h4>Digital Menus</h4>
+          <p>QR/NFC interactive menus, real-time updates.</p>
         </div>
-    </section>
-
-    <section id="pricing" class="pricing-section">
-        <div class="container">
-            <div class="section-title">
-                <h3>AFFORDABLE PRICING PLANS</h3>
-            </div>
-            
-            <div class="row justify-content-center gap-4 gap-lg-0">
-                <div class="col-md-8 col-lg-4 mb-4 mb-lg-0">
-                    <div class="pricing-card popular" style="background: linear-gradient(180deg, rgba(166,36,255,0.2) 0%, rgba(30,31,41,1) 40%);">
-                        <div class="pricing-header">
-                            <h5 class="text-light">Starter Solo</h5>
-                            <div class="price">₹499<span>/month</span></div>
-                        </div>
-                        <ul class="pricing-features list-unstyled">
-                            <li><i class="bi bi-check-circle-fill"></i> Physical NFC Card</li>
-                            <li><i class="bi bi-check-circle-fill"></i> Basic Web Profile</li>
-                            <li><i class="bi bi-check-circle-fill"></i> 5 Link Integrations</li>
-                            <li><i class="bi bi-check-circle-fill"></i> Standard Design</li>
-                        </ul>
-                        <button class="btn btn-gradient w-100 mt-4">Get Started</button>
-                    </div>
-                </div>
-
-                <div class="col-md-8 col-lg-4">
-                    <div class="pricing-card">
-                        <div class="pricing-header">
-                            <h5 class="text-light">Premium Pro</h5>
-                            <div class="price">₹699<span>/month</span></div>
-                        </div>
-                        <ul class="pricing-features list-unstyled">
-                            <li><i class="bi bi-check-circle-fill"></i> All Solo Features</li>
-                            <li><i class="bi bi-check-circle-fill"></i> Custom Coded Web Page</li>
-                            <li><i class="bi bi-check-circle-fill"></i> Tap Analytics Panel</li>
-                            <li><i class="bi bi-check-circle-fill"></i> Lead Capture Forms</li>
-                        </ul>
-                        <button class="btn btn-outline-light w-100 mt-4" style="border-color: var(--primary-purple); color: var(--secondary-purple);">Get Premium</button>
-                    </div>
-                </div>
-            </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="service-card text-center service-trigger" data-service="social">
+          <i class="fas fa-share-alt service-icon"></i>
+          <h4>Social Media</h4>
+          <p>Global reach, engagement, ad campaigns.</p>
         </div>
-    </section>
-
-    <footer id="about" class="footer">
-        <div class="container">
-            <div class="row text-center text-md-start">
-                <div class="col-lg-4 mb-4">
-                    <a class="navbar-brand d-block mb-3" href="#">
-                        <i class="bi bi-hexagon-fill"></i> Solo DI
-                    </a>
-                    <p>Market your business with every single tap.<br>Custom NFC & Digital Profile Solutions.</p>
-                </div>
-                <div class="col-lg-2 col-md-4 mb-4">
-                    <h6>Links</h6>
-                    <ul class="list-unstyled">
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#about">About</a></li>
-                        <li><a href="#how-it-works">How It Works</a></li>
-                        <li><a href="#services">NFC Services</a></li>
-                    </ul>
-                </div>
-                <div class="col-lg-2 col-md-4 mb-4">
-                    <h6>Company</h6>
-                    <ul class="list-unstyled">
-                        <li><a href="#">About Us</a></li>
-                        <li><a href="#">Contact Us</a></li>
-                        <li><a href="#">Careers</a></li>
-                        <li><a href="#">Social Media</a></li>
-                    </ul>
-                </div>
-                <div class="col-lg-4 col-md-4 mb-4">
-                    <h6>Contact</h6>
-                    <ul class="list-unstyled text-muted">
-                        <li class="mb-2" style="color: #ffffff;"><i class="bi bi-envelope me-2" ></i> shivankshukla1k@gmail.com</li>
-                        <li class="mb-2" style="color: #ffffff;"><i class="bi bi-telephone me-2"></i> +91 7897055511</li>
-                        
-                    </ul>
-                    <div class="social-icons mt-3">
-                        <a href="#"><i class="bi bi-facebook"></i></a>
-                        <a href="#"><i class="bi bi-twitter-x"></i></a>
-                        <a href="#"><i class="bi bi-instagram"></i></a>
-                        <a href="#"><i class="bi bi-linkedin"></i></a>
-                    </div>
-                </div>
-            </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="service-card text-center service-trigger" data-service="video">
+          <i class="fas fa-video service-icon"></i>
+          <h4>Video Editing</h4>
+          <p>Powerful storytelling & data-driven visuals.</p>
         </div>
-    </footer>
+      </div>
+    </div>
+  </section>
+</div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+<!-- All Service Detail Pages (hidden initially) -->
+<div id="servicesDetailWrapper" style="display: none;">
+  <!-- NFC Business Card Page -->
+  <div id="service-nfc" class="service-detail-page container py-4">
+    <div class="mb-4 d-flex justify-content-between align-items-center flex-wrap">
+      <button class="back-home-btn"><i class="fas fa-arrow-left me-2"></i>Back to Home</button>
+      <h2 class="text-cyan-400 mt-2 mt-sm-0"><i class="fas fa-id-card me-2"></i>NFC Business Cards</h2>
+    </div>
+    <div class="text-center my-4">
+      <h1 class="display-5 fw-bold">NFC Business Cards: <span class="text-info">Your Digital Gateway.</span></h1>
+      <button class="btn btn-cyber mt-3">Get Yours Now</button>
+    </div>
+    <!-- Uses & Benefits Grid -->
+    <div class="row g-4 mt-2">
+      <div class="col-md-3 col-sm-6"><div class="benefit-card p-4 text-center"><i class="fas fa-fingerprint fs-1 text-info"></i><h5 class="mt-3">Contactless Sharing</h5><p>Single tap, instant transfer of profile & links.</p></div></div>
+      <div class="col-md-3 col-sm-6"><div class="benefit-card p-4 text-center"><i class="fas fa-sync-alt fs-1 text-info"></i><h5>Real-Time Updates</h5><p>Update linked content remotely, no reprint needed.</p></div></div>
+      <div class="col-md-3 col-sm-6"><div class="benefit-card p-4 text-center"><i class="fas fa-leaf fs-1 text-info"></i><h5>Eco-Friendly</h5><p>Sustainable, durable, paperless networking.</p></div></div>
+      <div class="col-md-3 col-sm-6"><div class="benefit-card p-4 text-center"><i class="fas fa-chart-line fs-1 text-info"></i><h5>Enhanced Engagement</h5><p>Monitor tap-through rates & interactions.</p></div></div>
+    </div>
+    <!-- Portfolio Preview section -->
+    <div class="mt-5">
+      <h3 class="mb-3">✨ NFC Card Portfolio Preview</h3>
+      <div class="row g-4">
+        <div class="col-md-6"><div class="glass-card p-3 d-flex align-items-center gap-3"><i class="fas fa-address-card fa-2x text-info"></i><div><h5 class="mb-1">Client NFC Card Portfolio</h5><p class="small">View Client Story <i class="fas fa-arrow-right"></i></p></div></div></div>
+        <div class="col-md-6"><div class="glass-card p-3 d-flex align-items-center gap-3"><i class="fas fa-qrcode fa-2x text-info"></i><div><h5 class="mb-1">Dynamic Digital Menu App</h5><p class="small">View Client Story <i class="fas fa-arrow-right"></i></p></div></div></div>
+      </div>
+    </div>
+    <div class="mt-5 text-muted small"><i class="fas fa-chart-simple"></i> Integration ready: track every tap.</div>
+  </div>
+
+  <!-- Google Business Profile Page -->
+  <div id="service-gbp" class="service-detail-page container py-4">
+    <div class="mb-4"><button class="back-home-btn"><i class="fas fa-arrow-left me-2"></i>Back to Home</button></div>
+    <div class="text-center"><h1 class="display-5 fw-bold">Google Business Profile: <span class="text-info">Dominate Local Search.</span></h1><p class="lead">Claim Your Digital Storefront on Google Search & Maps. Be Seen by Customers Right When They Need You.</p><button class="btn btn-cyber mt-2">Boost Your Local Visibility</button></div>
+    <div class="row g-4 mt-4">
+      <div class="col-md-6 col-lg-4"><div class="glass-card p-3"><i class="fas fa-info-circle text-info"></i><h5 class="mt-2">Listing & Info Optimization</h5><p>Accurate details, hours, photos.</p></div></div>
+      <div class="col-md-6 col-lg-4"><div class="glass-card p-3"><i class="fas fa-chart-simple text-info"></i><h5>Local SEO & Ranking</h5><p>Top results on Google Maps & Search.</p></div></div>
+      <div class="col-md-6 col-lg-4"><div class="glass-card p-3"><i class="fas fa-star text-info"></i><h5>Review Management</h5><p>Engage & build trust.</p></div></div>
+      <div class="col-md-6 col-lg-4"><div class="glass-card p-3"><i class="fas fa-calendar-alt text-info"></i><h5>Google Posts & Updates</h5><p>Offers, events, news scheduling.</p></div></div>
+      <div class="col-md-6 col-lg-4"><div class="glass-card p-3"><i class="fas fa-chart-line text-info"></i><h5>Insights & Analytics</h5><p>Calls, foot traffic, profile views.</p></div></div>
+      <div class="col-md-6 col-lg-4"><div class="glass-card p-3"><i class="fas fa-chess text-info"></i><h5>Competitor Analysis</h5><p>Uncover strategic advantages.</p></div></div>
+    </div>
+    <div class="mt-5 row align-items-center"><div class="col-md-6"><div class="glass-card p-4"><i class="fas fa-chart-line fs-1 text-info"></i><h4>Client Success: NFC Card & GBP Integration</h4><p>Seamless linking NFC card to optimized GBP for instant profile access. +46% local searches.</p></div></div><div class="col-md-6"><div class="glass-card p-4 text-center"><i class="fas fa-chart-column fs-1 text-info"></i><p><strong>See Local Ranking Gain</strong> <br>+200% Map Views</p><button class="btn btn-outline-neon mt-2">View GBP Dashboard</button></div></div></div>
+    <div class="mt-4"><p class="text-info-emphasis">⭐ Your Local Search Experts – A.S. Creative</p></div>
+  </div>
+
+  <!-- Video Editing Page -->
+  <div id="service-video" class="service-detail-page container py-4">
+    <div class="mb-4"><button class="back-home-btn"><i class="fas fa-arrow-left me-2"></i>Back to Home</button></div>
+    <div class="text-center"><h1 class="display-5 fw-bold">Video Editing: <span class="text-info">Powerful Visual Storytelling.</span></h1><p>Craft compelling videos that reach new customers, engage your audience, and build lasting loyalty.</p><button class="btn btn-cyber">Schedule Your Video Consultation</button></div>
+    <div class="row g-4 mt-4">
+      <div class="col-md-6"><div class="glass-card p-3"><i class="fas fa-film text-info"></i><h5>Professional Cinematic Editing</h5><p>Color grading, sound design, pacing.</p></div></div>
+      <div class="col-md-6"><div class="glass-card p-3"><i class="fas fa-pen-nib text-info"></i><h5>Creative Concept & Scripting</h5><p>Storylines from idea to execution.</p></div></div>
+      <div class="col-md-6"><div class="glass-card p-3"><i class="fas fa-chart-simple text-info"></i><h5>Video Performance Analytics & AB Testing</h5><p>Data-driven optimization for views & engagement.</p></div></div>
+      <div class="col-md-6"><div class="glass-card p-3"><i class="fas fa-chart-line text-info"></i><h5>Competitor Video Strategy Analysis</h5><p>Uncover trends & creative edge.</p></div></div>
+      <div class="col-md-6"><div class="glass-card p-3"><i class="fab fa-tiktok text-info"></i><h5>Social Media Shorts & Reels</h5><p>Viral content for TikTok, Reels, Shorts.</p></div></div>
+      <div class="col-md-6"><div class="glass-card p-3"><i class="fas fa-building text-info"></i><h5>Corporate & Brand Documentaries</h5><p>Deep-dive storytelling.</p></div></div>
+    </div>
+    <div class="mt-5 row g-4">
+      <div class="col-md-6"><div class="glass-card p-4 text-center zoom-img"><div class="stats-number">3x</div><p>Higher Conversion Rate</p><small>E-commerce Video Conversion Boost</small><hr><span class="text-info">150% Sales Growth</span></div></div>
+      <div class="col-md-6"><div class="glass-card p-4 text-center zoom-img"><div class="stats-number">5M+</div><p>Global Views</p><p>International Brand Campaign <br>20k Social Shares</p></div></div>
+    </div>
+    <div class="mt-4"><p class="fst-italic">We don’t just edit; we tell stories. Data-led creative.</p></div>
+  </div>
+
+  <!-- Social Media Page -->
+  <div id="service-social" class="service-detail-page container py-4">
+    <div class="mb-4"><button class="back-home-btn"><i class="fas fa-arrow-left me-2"></i>Back to Home</button></div>
+    <div class="text-center"><h1 class="display-5 fw-bold">Social Media: <span class="text-info">Propel Your Brand Globally.</span></h1><p>Reach new customers, engage your audience, build lasting loyalty on platforms that matter.</p><button class="btn btn-cyber">Skyrocket Your Reach</button></div>
+    <div class="row g-4 mt-4">
+      <div class="col-md-6"><div class="glass-card p-3"><i class="fas fa-chalkboard-user text-info"></i><h5>Strategic Platform Management</h5><p>Setup, scheduling, consistent messaging.</p></div></div>
+      <div class="col-md-6"><div class="glass-card p-3"><i class="fas fa-chart-line text-info"></i><h5>Targeted Audience Growth</h5><p>Data-driven segmentation, loyal following.</p></div></div>
+      <div class="col-md-6"><div class="glass-card p-3"><i class="fas fa-comments text-info"></i><h5>Community Building & Engagement</h5><p>Two-way communication, contests, comments.</p></div></div>
+      <div class="col-md-6"><div class="glass-card p-3"><i class="fas fa-ad text-info"></i><h5>Cross-Platform Ad Campaigns</h5><p>Meta, LinkedIn, X, TikTok ads optimization.</p></div></div>
+      <div class="col-md-6"><div class="glass-card p-3"><i class="fas fa-chart-pie text-info"></i><h5>Performance Tracking & Reporting</h5><p>Detailed analytics ROI & insights.</p></div></div>
+      <div class="col-md-6"><div class="glass-card p-3"><i class="fas fa-chart-simple text-info"></i><h5>Competitor Analysis & Trends</h5><p>Stay ahead of market curve.</p></div></div>
+    </div>
+    <div class="mt-5 row g-4">
+      <div class="col-md-6"><div class="glass-card p-4 text-center"><div class="stats-number">210%</div><p>More Leads</p><strong>E-commerce Sales Surge</strong></div></div>
+      <div class="col-md-6"><div class="glass-card p-4 text-center"><div class="stats-number">50k+</div><p>New Followers</p><strong>Brand Awareness Lift</strong></div></div>
+    </div>
+    <div class="mt-4"><i class="fas fa-bullhorn text-info"></i> Data-led creative content, from organic to ads — we do it all.</div>
+  </div>
+
+  <!-- Web Development custom page -->
+  <div id="service-web" class="service-detail-page container py-4">
+    <div class="mb-4"><button class="back-home-btn"><i class="fas fa-arrow-left me-2"></i>Back to Home</button></div>
+    <div class="text-center"><h1 class="display-5 fw-bold">Web Development: <span class="text-info">High-Performance Digital Experiences.</span></h1><p>Custom websites, eCommerce platforms, and CMS solutions.</p><button class="btn btn-cyber">Start Your Project</button></div>
+    <div class="row g-4 mt-4"><div class="col-md-4"><div class="glass-card p-3"><i class="fab fa-react text-info"></i><h5>Modern Frontend</h5><p>React, Vue, responsive UI/UX</p></div></div><div class="col-md-4"><div class="glass-card p-3"><i class="fas fa-database text-info"></i><h5>Backend & API</h5><p>Node, Python, robust architecture</p></div></div><div class="col-md-4"><div class="glass-card p-3"><i class="fas fa-cart-shopping text-info"></i><h5>E‑commerce</h5><p>Shopify, Woo, custom carts</p></div></div></div>
+    <div class="mt-5 glass-card p-4"><i class="fas fa-chart-line text-info"></i> Client success: 60% faster load times, 45% conversion increase.</div>
+  </div>
+
+  <!-- Digital Menus page -->
+  <div id="service-menus" class="service-detail-page container py-4">
+    <div class="mb-4"><button class="back-home-btn"><i class="fas fa-arrow-left me-2"></i>Back to Home</button></div>
+    <div class="text-center"><h1 class="display-5 fw-bold">Digital 
