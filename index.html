@@ -3,11 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>A.S. Creative | Digital Relationships</title>
-  <!-- Bootstrap 5 + Icons + Fonts -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <title>Rowdy Cafe | Break the Rule, Taste the Difference</title>
+  <!-- Google Fonts & Font Awesome -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
     * {
       margin: 0;
@@ -16,493 +15,549 @@
     }
 
     body {
+      background: #0a0a0a;
       font-family: 'Inter', sans-serif;
-      background: radial-gradient(circle at 10% 20%, #030712, #000000);
-      color: #f1f5f9;
+      color: #f5f5f5;
       scroll-behavior: smooth;
-      overflow-x: hidden;
     }
 
-    /* neon glow & glassmorphism */
-    .glass-card, .service-card, .benefit-card, .portfolio-item, .stat-card {
-      background: rgba(15, 25, 35, 0.65);
+    /* Sticky Header */
+    .sticky-header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(10, 10, 10, 0.92);
       backdrop-filter: blur(12px);
-      border: 1px solid rgba(0, 255, 255, 0.2);
-      border-radius: 20px;
-      transition: all 0.3s ease;
-      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+      border-bottom: 1px solid rgba(245, 179, 1, 0.25);
+      padding: 0.9rem 1.5rem;
+      transition: all 0.2s ease;
     }
 
-    .glass-card:hover, .service-card:hover, .benefit-card:hover {
-      border-color: #0ff;
-      box-shadow: 0 0 18px rgba(0, 255, 255, 0.3);
-      transform: translateY(-6px);
+    .header-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.8rem;
     }
 
-    .btn-cyber {
-      background: linear-gradient(95deg, #0ff0c0, #0af);
-      border: none;
-      color: #0a0f1a;
-      font-weight: 700;
-      padding: 12px 28px;
-      border-radius: 40px;
-      transition: all 0.2s;
-      box-shadow: 0 0 8px #0ff7;
+    .hamburger {
+      font-size: 1.9rem;
+      cursor: pointer;
+      color: #f5b301;
+      transition: transform 0.2s;
+      width: 40px;
     }
-    .btn-cyber:hover {
-      transform: scale(1.02);
-      background: linear-gradient(95deg, #0ff, #0cf);
-      box-shadow: 0 0 20px #0ff;
-      color: #000;
-    }
-    .btn-outline-neon {
-      border: 1px solid #0ff;
-      background: transparent;
-      color: #0ff;
-      border-radius: 40px;
-      padding: 10px 24px;
-      font-weight: 600;
-      transition: 0.2s;
-    }
-    .btn-outline-neon:hover {
-      background: #0ff22a;
-      color: #000;
-      box-shadow: 0 0 12px cyan;
+    .hamburger:hover {
+      transform: scale(1.05);
     }
 
-    h1, h2, h3 {
-      font-weight: 700;
-      letter-spacing: -0.02em;
-    }
-    .hero-glow {
-      text-shadow: 0 0 12px rgba(0, 255, 255, 0.6);
-    }
-    .navbar {
-      background: rgba(0, 0, 0, 0.85);
-      backdrop-filter: blur(16px);
-      border-bottom: 1px solid rgba(0, 255, 255, 0.2);
-    }
-    .navbar-brand {
-      font-weight: 800;
+    .logo {
       font-size: 1.7rem;
-      background: linear-gradient(135deg, #fff, #0ff);
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      background: linear-gradient(135deg, #f5b301 30%, #ffdd77 80%);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
+      text-shadow: 0 2px 5px rgba(0,0,0,0.3);
     }
-    .nav-link {
-      color: #e2e8f0;
-      font-weight: 500;
-      transition: 0.2s;
-    }
-    .nav-link:hover {
-      color: #0ff;
-      text-shadow: 0 0 4px cyan;
+    .logo span {
+      color: #fff;
+      background: none;
+      -webkit-background-clip: unset;
+      background-clip: unset;
+      font-weight: 700;
     }
 
-    /* background animated network lines (abstract) */
-    .bg-lines {
+    .header-right {
+      text-align: right;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 4px;
+    }
+    .tagline {
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.3px;
+      color: #e0e0e0;
+    }
+    .outlet-badge {
+      background: #f5b30120;
+      backdrop-filter: blur(4px);
+      padding: 4px 10px;
+      border-radius: 40px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: #f5b301;
+      border: 0.5px solid #f5b30170;
+    }
+
+    /* Sidebar overlay (mobile menu) */
+    .sidebar-nav {
+      position: fixed;
+      top: 0;
+      left: -100%;
+      width: 85%;
+      max-width: 340px;
+      height: 100vh;
+      background: #111111;
+      z-index: 1100;
+      transition: left 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+      box-shadow: 8px 0 25px rgba(0,0,0,0.8);
+      padding: 2rem 1.2rem;
+      overflow-y: auto;
+      border-right: 2px solid #f5b301;
+    }
+    .sidebar-nav.open {
+      left: 0;
+    }
+    .sidebar-nav .close-menu {
+      text-align: right;
+      font-size: 1.8rem;
+      cursor: pointer;
+      color: #f5b301;
+      margin-bottom: 1.8rem;
+    }
+    .sidebar-nav h4 {
+      font-size: 1.2rem;
+      border-left: 4px solid #f5b301;
+      padding-left: 12px;
+      margin: 1.2rem 0 0.8rem 0;
+      color: #f5b301;
+    }
+    .sidebar-nav ul {
+      list-style: none;
+    }
+    .sidebar-nav li {
+      margin: 0.9rem 0;
+    }
+    .sidebar-nav a {
+      color: #ddd;
+      text-decoration: none;
+      font-weight: 500;
+      transition: 0.2s;
+      display: block;
+      padding: 4px 0;
+      font-size: 1rem;
+    }
+    .sidebar-nav a:hover {
+      color: #f5b301;
+      transform: translateX(6px);
+    }
+    .overlay-blur {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      pointer-events: none;
-      z-index: 0;
-      opacity: 0.2;
-      background-image: radial-gradient(circle at 20% 30%, rgba(0,255,255,0.1) 1px, transparent 1px);
-      background-size: 40px 40px;
-      animation: subtleMove 30s linear infinite;
+      background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(3px);
+      z-index: 1050;
+      opacity: 0;
+      visibility: hidden;
+      transition: 0.2s;
     }
-    @keyframes subtleMove {
-      0% { background-position: 0 0; }
-      100% { background-position: 80px 80px; }
-    }
-
-    .service-card, .benefit-card {
-      cursor: pointer;
-      height: 100%;
-      padding: 1.5rem;
-      transition: all 0.25s;
-    }
-    .service-icon {
-      font-size: 2.5rem;
-      color: #0ff;
-      margin-bottom: 1rem;
+    .overlay-blur.active {
+      opacity: 1;
+      visibility: visible;
     }
 
-    /* image hover zoom */
-    .zoom-img {
-      transition: transform 0.4s ease;
-      border-radius: 16px;
+    /* Main container */
+    .container {
+      max-width: 1300px;
+      margin: 2rem auto;
+      padding: 0 1.2rem;
+    }
+
+    /* Grid layout cards */
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 2rem;
+      margin-top: 1rem;
+    }
+
+    /* Category Card */
+    .category-card {
+      background: #151515;
+      border-radius: 28px;
       overflow: hidden;
+      transition: transform 0.25s ease, box-shadow 0.3s;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(2px);
+      border: 1px solid #2b2b2b;
     }
-    .zoom-img:hover {
+    .category-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 22px 35px -10px rgba(245, 179, 1, 0.25);
+      border-color: #f5b30140;
+    }
+
+    .card-img {
+      width: 100%;
+      height: 170px;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    .category-card:hover .card-img {
       transform: scale(1.02);
     }
 
-    /* footer */
-    .footer {
-      background: #03070fcc;
-      backdrop-filter: blur(8px);
-      border-top: 1px solid rgba(0,255,255,0.2);
-    }
-
-    .section-title {
-      position: relative;
-      display: inline-block;
-      margin-bottom: 2rem;
-    }
-    .section-title:after {
-      content: '';
-      position: absolute;
-      bottom: -12px;
-      left: 0;
-      width: 60%;
-      height: 3px;
-      background: linear-gradient(90deg, #0ff, transparent);
-    }
-
-    /* mobile first adjustments */
-    @media (max-width: 768px) {
-      .hero-display {
-        font-size: 2.4rem;
-      }
-      .btn-cyber {
-        padding: 10px 20px;
-      }
-    }
-
-    .stats-number {
-      font-size: 2rem;
+    /* Yellow paint-style heading */
+    .card-heading {
+      background: #f5b301;
+      padding: 12px 18px;
+      margin: 0;
+      font-size: 1.6rem;
       font-weight: 800;
-      color: #0ff;
+      letter-spacing: -0.3px;
+      color: #0a0a0a;
+      position: relative;
+      clip-path: polygon(0% 0%, 100% 0%, 97% 100%, 0% 100%);
+      text-transform: uppercase;
+      border-bottom: 2px solid #ffda77;
+      font-family: 'Inter', sans-serif;
     }
-    .back-home-btn {
-      background: none;
-      border: 1px solid #0ff;
-      color: #0ff;
-      border-radius: 40px;
-      padding: 8px 20px;
+
+    .menu-items {
+      padding: 1rem 1rem 1.3rem;
+    }
+
+    .menu-item-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 0.6rem 0;
+      border-bottom: 1px dashed #2c2c2c;
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: 0.1s;
+    }
+    .menu-item-row span:first-child {
+      font-weight: 500;
+      color: #eaeaea;
+    }
+    .menu-item-row .price {
+      font-weight: 700;
+      color: #f5b301;
+      background: #1e1e1e;
+      padding: 2px 9px;
+      border-radius: 30px;
+      font-size: 0.85rem;
+    }
+
+    /* bottom cta section */
+    .doorstep-section {
+      background: linear-gradient(145deg, #101010, #080808);
+      margin: 4rem 1.2rem 2rem;
+      padding: 2.5rem 1.5rem;
+      border-radius: 60px;
+      text-align: center;
+      border: 1px solid #2c2c2c;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.6);
+    }
+    .doorstep-icon {
+      font-size: 2.7rem;
+      color: #f5b301;
+      margin-bottom: 0.5rem;
+    }
+    .doorstep-section h3 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+    .order-now-btn {
+      background: #f5b301;
+      border: none;
+      padding: 14px 38px;
+      font-size: 1.3rem;
+      font-weight: 800;
+      border-radius: 60px;
+      color: #0a0a0a;
+      margin: 1rem 0;
+      cursor: pointer;
+      transition: 0.2s;
+      box-shadow: 0 5px 0 #b87f00;
+      font-family: inherit;
+    }
+    .order-now-btn:hover {
+      transform: translateY(-2px);
+      background: #ffcc33;
+      box-shadow: 0 8px 18px rgba(245,179,1,0.4);
+    }
+    .social-icons {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin: 1.5rem 0 0.8rem;
+      font-size: 1.8rem;
+    }
+    .social-icons a {
+      color: #ccc;
       transition: 0.2s;
     }
-    .back-home-btn:hover {
-      background: #0ff;
-      color: black;
+    .social-icons a:hover {
+      color: #f5b301;
+      transform: scale(1.1);
     }
-    .service-detail-page {
-      animation: fadeSlideUp 0.5s ease;
+    .website-link {
+      color: #f5b301;
+      text-decoration: none;
+      font-weight: 600;
+      letter-spacing: 0.5px;
     }
+
+    footer {
+      text-align: center;
+      padding: 2rem 1rem 2rem;
+      font-size: 0.75rem;
+      color: #6c6c6c;
+    }
+
+    /* animations */
     @keyframes fadeSlideUp {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
+      0% { opacity: 0; transform: translateY(25px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    .category-card {
+      animation: fadeSlideUp 0.5s ease forwards;
+    }
+
+    @media (max-width: 680px) {
+      .header-container {
+        justify-content: space-between;
       }
-      to {
-        opacity: 1;
-        transform: translateY(0);
+      .logo {
+        font-size: 1.4rem;
+      }
+      .tagline {
+        font-size: 0.65rem;
+      }
+      .outlet-badge {
+        font-size: 0.6rem;
+      }
+      .card-heading {
+        font-size: 1.35rem;
+        padding: 10px 16px;
+      }
+      .menu-grid {
+        gap: 1.3rem;
+      }
+      .order-now-btn {
+        padding: 12px 28px;
+        font-size: 1.1rem;
       }
     }
   </style>
 </head>
 <body>
 
-<div class="bg-lines"></div>
+<div class="overlay-blur" id="overlayBlur"></div>
 
-<!-- Sticky Navbar -->
-<nav class="navbar navbar-expand-lg sticky-top py-3">
-  <div class="container">
-    <a class="navbar-brand" href="#" id="homeNavBtn"><i class="fas fa-meteor me-2"></i>A.S. Creative</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"><i class="fas fa-bars text-white"></i></span>
-    </button>
-    <div class="collapse navbar-collapse" id="mainNav">
-      <ul class="navbar-nav ms-auto mb-2 mb-lg-0 gap-3">
-        <li class="nav-item"><a class="nav-link" href="#" id="navHome">Home</a></li>
-        <li class="nav-item"><a class="nav-link" href="#" id="navServices">Services</a></li>
-        <li class="nav-item"><a class="nav-link" href="#" id="navContact">Contact</a></li>
-      </ul>
-    </div>
+<!-- Sidebar Menu (collapsible) -->
+<div class="sidebar-nav" id="sidebarMenu">
+  <div class="close-menu" id="closeSidebar"><i class="fas fa-times-circle"></i></div>
+  <div style="margin-bottom: 1rem;">
+    <i class="fas fa-utensils" style="color:#f5b301; font-size: 2rem;"></i>
+    <h3 style="color:white; margin-top: 0.2rem;">Rowdy Menu</h3>
   </div>
-</nav>
-
-<!-- MAIN HOME PAGE SECTION -->
-<div id="homePageContainer">
-  <!-- Hero Section -->
-  <section class="container pt-5 mt-3">
-    <div class="row align-items-center min-vh-50 py-5">
-      <div class="col-lg-8 mx-auto text-center">
-        <h1 class="display-3 fw-bold hero-glow mb-4">Turning Physical Interactions Into <span style="color:#0ff;">Digital Relationships.</span></h1>
-        <p class="lead fs-4 text-light-emphasis mb-4">One partner. Every digital need.</p>
-        <button class="btn btn-cyber btn-lg" id="getStartedBtn">Get Started <i class="fas fa-arrow-right ms-2"></i></button>
-      </div>
-    </div>
-  </section>
-
-  <!-- Services Section Grid -->
-  <section class="container py-5" id="servicesMainSection">
-    <div class="text-center mb-5">
-      <h2 class="section-title">Our Digital Solutions</h2>
-      <p class="text-secondary">Click any card to explore full service experience</p>
-    </div>
-    <div class="row g-4">
-      <!-- 6 Service Cards -->
-      <div class="col-md-6 col-lg-4">
-        <div class="service-card text-center service-trigger" data-service="nfc">
-          <i class="fas fa-id-card service-icon"></i>
-          <h4>NFC Business Cards</h4>
-          <p>Tap & share contact details, socials, real-time updates.</p>
-        </div>
-      </div>
-      <div class="col-md-6 col-lg-4">
-        <div class="service-card text-center service-trigger" data-service="web">
-          <i class="fas fa-code service-icon"></i>
-          <h4>Web Development</h4>
-          <p>Custom, blazing-fast websites & web apps.</p>
-        </div>
-      </div>
-      <div class="col-md-6 col-lg-4">
-        <div class="service-card text-center service-trigger" data-service="gbp">
-          <i class="fab fa-google service-icon"></i>
-          <h4>Google Business Profile</h4>
-          <p>Dominate local search, manage reviews & insights.</p>
-        </div>
-      </div>
-      <div class="col-md-6 col-lg-4">
-        <div class="service-card text-center service-trigger" data-service="menus">
-          <i class="fas fa-utensils service-icon"></i>
-          <h4>Digital Menus</h4>
-          <p>QR/NFC interactive menus, real-time updates.</p>
-        </div>
-      </div>
-      <div class="col-md-6 col-lg-4">
-        <div class="service-card text-center service-trigger" data-service="social">
-          <i class="fas fa-share-alt service-icon"></i>
-          <h4>Social Media</h4>
-          <p>Global reach, engagement, ad campaigns.</p>
-        </div>
-      </div>
-      <div class="col-md-6 col-lg-4">
-        <div class="service-card text-center service-trigger" data-service="video">
-          <i class="fas fa-video service-icon"></i>
-          <h4>Video Editing</h4>
-          <p>Powerful storytelling & data-driven visuals.</p>
-        </div>
-      </div>
-    </div>
-  </section>
+  <h4><i class="fas fa-fire"></i> All Categories</h4>
+  <ul id="menuNavList">
+    <!-- dynamically filled with js -->
+  </ul>
 </div>
 
-<!-- All Service Detail Pages (hidden initially) -->
-<div id="servicesDetailWrapper" style="display: none;">
-  <!-- NFC Business Card Page -->
-  <div id="service-nfc" class="service-detail-page container py-4">
-    <div class="mb-4 d-flex justify-content-between align-items-center flex-wrap">
-      <button class="back-home-btn"><i class="fas fa-arrow-left me-2"></i>Back to Home</button>
-      <h2 class="text-cyan-400 mt-2 mt-sm-0"><i class="fas fa-id-card me-2"></i>NFC Business Cards</h2>
+<header class="sticky-header">
+  <div class="header-container">
+    <div class="hamburger" id="hamburgerBtn">
+      <i class="fas fa-bars"></i>
     </div>
-    <div class="text-center my-4">
-      <h1 class="display-5 fw-bold">NFC Business Cards: <span class="text-info">Your Digital Gateway.</span></h1>
-      <button class="btn btn-cyber mt-3">Get Yours Now</button>
+    <div class="logo">ROWDY <span>CAFE</span></div>
+    <div class="header-right">
+      <div class="tagline">🔥 Break the Rule, Taste the Difference</div>
+      <div class="outlet-badge">⭐ OVER 65 OUTLETS IN 8 STATES</div>
     </div>
-    <!-- Uses & Benefits Grid -->
-    <div class="row g-4 mt-2">
-      <div class="col-md-3 col-sm-6"><div class="benefit-card p-4 text-center"><i class="fas fa-fingerprint fs-1 text-info"></i><h5 class="mt-3">Contactless Sharing</h5><p>Single tap, instant transfer of profile & links.</p></div></div>
-      <div class="col-md-3 col-sm-6"><div class="benefit-card p-4 text-center"><i class="fas fa-sync-alt fs-1 text-info"></i><h5>Real-Time Updates</h5><p>Update linked content remotely, no reprint needed.</p></div></div>
-      <div class="col-md-3 col-sm-6"><div class="benefit-card p-4 text-center"><i class="fas fa-leaf fs-1 text-info"></i><h5>Eco-Friendly</h5><p>Sustainable, durable, paperless networking.</p></div></div>
-      <div class="col-md-3 col-sm-6"><div class="benefit-card p-4 text-center"><i class="fas fa-chart-line fs-1 text-info"></i><h5>Enhanced Engagement</h5><p>Monitor tap-through rates & interactions.</p></div></div>
-    </div>
-    <!-- Portfolio Preview section -->
-    <div class="mt-5">
-      <h3 class="mb-3">✨ NFC Card Portfolio Preview</h3>
-      <div class="row g-4">
-        <div class="col-md-6"><div class="glass-card p-3 d-flex align-items-center gap-3"><i class="fas fa-address-card fa-2x text-info"></i><div><h5 class="mb-1">Client NFC Card Portfolio</h5><p class="small">View Client Story <i class="fas fa-arrow-right"></i></p></div></div></div>
-        <div class="col-md-6"><div class="glass-card p-3 d-flex align-items-center gap-3"><i class="fas fa-qrcode fa-2x text-info"></i><div><h5 class="mb-1">Dynamic Digital Menu App</h5><p class="small">View Client Story <i class="fas fa-arrow-right"></i></p></div></div></div>
-      </div>
-    </div>
-    <div class="mt-5 text-muted small"><i class="fas fa-chart-simple"></i> Integration ready: track every tap.</div>
   </div>
+</header>
 
-  <!-- Google Business Profile Page -->
-  <div id="service-gbp" class="service-detail-page container py-4">
-    <div class="mb-4"><button class="back-home-btn"><i class="fas fa-arrow-left me-2"></i>Back to Home</button></div>
-    <div class="text-center"><h1 class="display-5 fw-bold">Google Business Profile: <span class="text-info">Dominate Local Search.</span></h1><p class="lead">Claim Your Digital Storefront on Google Search & Maps. Be Seen by Customers Right When They Need You.</p><button class="btn btn-cyber mt-2">Boost Your Local Visibility</button></div>
-    <div class="row g-4 mt-4">
-      <div class="col-md-6 col-lg-4"><div class="glass-card p-3"><i class="fas fa-info-circle text-info"></i><h5 class="mt-2">Listing & Info Optimization</h5><p>Accurate details, hours, photos.</p></div></div>
-      <div class="col-md-6 col-lg-4"><div class="glass-card p-3"><i class="fas fa-chart-simple text-info"></i><h5>Local SEO & Ranking</h5><p>Top results on Google Maps & Search.</p></div></div>
-      <div class="col-md-6 col-lg-4"><div class="glass-card p-3"><i class="fas fa-star text-info"></i><h5>Review Management</h5><p>Engage & build trust.</p></div></div>
-      <div class="col-md-6 col-lg-4"><div class="glass-card p-3"><i class="fas fa-calendar-alt text-info"></i><h5>Google Posts & Updates</h5><p>Offers, events, news scheduling.</p></div></div>
-      <div class="col-md-6 col-lg-4"><div class="glass-card p-3"><i class="fas fa-chart-line text-info"></i><h5>Insights & Analytics</h5><p>Calls, foot traffic, profile views.</p></div></div>
-      <div class="col-md-6 col-lg-4"><div class="glass-card p-3"><i class="fas fa-chess text-info"></i><h5>Competitor Analysis</h5><p>Uncover strategic advantages.</p></div></div>
-    </div>
-    <div class="mt-5 row align-items-center"><div class="col-md-6"><div class="glass-card p-4"><i class="fas fa-chart-line fs-1 text-info"></i><h4>Client Success: NFC Card & GBP Integration</h4><p>Seamless linking NFC card to optimized GBP for instant profile access. +46% local searches.</p></div></div><div class="col-md-6"><div class="glass-card p-4 text-center"><i class="fas fa-chart-column fs-1 text-info"></i><p><strong>See Local Ranking Gain</strong> <br>+200% Map Views</p><button class="btn btn-outline-neon mt-2">View GBP Dashboard</button></div></div></div>
-    <div class="mt-4"><p class="text-info-emphasis">⭐ Your Local Search Experts – A.S. Creative</p></div>
-  </div>
+<main class="container">
+  <div class="menu-grid" id="menuGrid"></div>
+</main>
 
-  <!-- Video Editing Page -->
-  <div id="service-video" class="service-detail-page container py-4">
-    <div class="mb-4"><button class="back-home-btn"><i class="fas fa-arrow-left me-2"></i>Back to Home</button></div>
-    <div class="text-center"><h1 class="display-5 fw-bold">Video Editing: <span class="text-info">Powerful Visual Storytelling.</span></h1><p>Craft compelling videos that reach new customers, engage your audience, and build lasting loyalty.</p><button class="btn btn-cyber">Schedule Your Video Consultation</button></div>
-    <div class="row g-4 mt-4">
-      <div class="col-md-6"><div class="glass-card p-3"><i class="fas fa-film text-info"></i><h5>Professional Cinematic Editing</h5><p>Color grading, sound design, pacing.</p></div></div>
-      <div class="col-md-6"><div class="glass-card p-3"><i class="fas fa-pen-nib text-info"></i><h5>Creative Concept & Scripting</h5><p>Storylines from idea to execution.</p></div></div>
-      <div class="col-md-6"><div class="glass-card p-3"><i class="fas fa-chart-simple text-info"></i><h5>Video Performance Analytics & AB Testing</h5><p>Data-driven optimization for views & engagement.</p></div></div>
-      <div class="col-md-6"><div class="glass-card p-3"><i class="fas fa-chart-line text-info"></i><h5>Competitor Video Strategy Analysis</h5><p>Uncover trends & creative edge.</p></div></div>
-      <div class="col-md-6"><div class="glass-card p-3"><i class="fab fa-tiktok text-info"></i><h5>Social Media Shorts & Reels</h5><p>Viral content for TikTok, Reels, Shorts.</p></div></div>
-      <div class="col-md-6"><div class="glass-card p-3"><i class="fas fa-building text-info"></i><h5>Corporate & Brand Documentaries</h5><p>Deep-dive storytelling.</p></div></div>
-    </div>
-    <div class="mt-5 row g-4">
-      <div class="col-md-6"><div class="glass-card p-4 text-center zoom-img"><div class="stats-number">3x</div><p>Higher Conversion Rate</p><small>E-commerce Video Conversion Boost</small><hr><span class="text-info">150% Sales Growth</span></div></div>
-      <div class="col-md-6"><div class="glass-card p-4 text-center zoom-img"><div class="stats-number">5M+</div><p>Global Views</p><p>International Brand Campaign <br>20k Social Shares</p></div></div>
-    </div>
-    <div class="mt-4"><p class="fst-italic">We don’t just edit; we tell stories. Data-led creative.</p></div>
+<!-- Bottom Call to Action -->
+<div class="doorstep-section">
+  <div class="doorstep-icon"><i class="fas fa-motorcycle"></i> <i class="fas fa-home"></i></div>
+  <h3>We deliver at your doorstep!</h3>
+  <button class="order-now-btn" id="orderNowBtn">🍔 ORDER NOW 🍟</button>
+  <div class="social-icons">
+    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+    <a href="#" aria-label="Whatsapp"><i class="fab fa-whatsapp"></i></a>
   </div>
-
-  <!-- Social Media Page -->
-  <div id="service-social" class="service-detail-page container py-4">
-    <div class="mb-4"><button class="back-home-btn"><i class="fas fa-arrow-left me-2"></i>Back to Home</button></div>
-    <div class="text-center"><h1 class="display-5 fw-bold">Social Media: <span class="text-info">Propel Your Brand Globally.</span></h1><p>Reach new customers, engage your audience, build lasting loyalty on platforms that matter.</p><button class="btn btn-cyber">Skyrocket Your Reach</button></div>
-    <div class="row g-4 mt-4">
-      <div class="col-md-6"><div class="glass-card p-3"><i class="fas fa-chalkboard-user text-info"></i><h5>Strategic Platform Management</h5><p>Setup, scheduling, consistent messaging.</p></div></div>
-      <div class="col-md-6"><div class="glass-card p-3"><i class="fas fa-chart-line text-info"></i><h5>Targeted Audience Growth</h5><p>Data-driven segmentation, loyal following.</p></div></div>
-      <div class="col-md-6"><div class="glass-card p-3"><i class="fas fa-comments text-info"></i><h5>Community Building & Engagement</h5><p>Two-way communication, contests, comments.</p></div></div>
-      <div class="col-md-6"><div class="glass-card p-3"><i class="fas fa-ad text-info"></i><h5>Cross-Platform Ad Campaigns</h5><p>Meta, LinkedIn, X, TikTok ads optimization.</p></div></div>
-      <div class="col-md-6"><div class="glass-card p-3"><i class="fas fa-chart-pie text-info"></i><h5>Performance Tracking & Reporting</h5><p>Detailed analytics ROI & insights.</p></div></div>
-      <div class="col-md-6"><div class="glass-card p-3"><i class="fas fa-chart-simple text-info"></i><h5>Competitor Analysis & Trends</h5><p>Stay ahead of market curve.</p></div></div>
-    </div>
-    <div class="mt-5 row g-4">
-      <div class="col-md-6"><div class="glass-card p-4 text-center"><div class="stats-number">210%</div><p>More Leads</p><strong>E-commerce Sales Surge</strong></div></div>
-      <div class="col-md-6"><div class="glass-card p-4 text-center"><div class="stats-number">50k+</div><p>New Followers</p><strong>Brand Awareness Lift</strong></div></div>
-    </div>
-    <div class="mt-4"><i class="fas fa-bullhorn text-info"></i> Data-led creative content, from organic to ads — we do it all.</div>
+  <div style="margin-top: 1rem;">
+    <a href="#" class="website-link">www.rowdycafe.com</a>
   </div>
-
-  <!-- Web Development custom page -->
-  <div id="service-web" class="service-detail-page container py-4">
-    <div class="mb-4"><button class="back-home-btn"><i class="fas fa-arrow-left me-2"></i>Back to Home</button></div>
-    <div class="text-center"><h1 class="display-5 fw-bold">Web Development: <span class="text-info">High-Performance Digital Experiences.</span></h1><p>Custom websites, eCommerce platforms, and CMS solutions.</p><button class="btn btn-cyber">Start Your Project</button></div>
-    <div class="row g-4 mt-4"><div class="col-md-4"><div class="glass-card p-3"><i class="fab fa-react text-info"></i><h5>Modern Frontend</h5><p>React, Vue, responsive UI/UX</p></div></div><div class="col-md-4"><div class="glass-card p-3"><i class="fas fa-database text-info"></i><h5>Backend & API</h5><p>Node, Python, robust architecture</p></div></div><div class="col-md-4"><div class="glass-card p-3"><i class="fas fa-cart-shopping text-info"></i><h5>E‑commerce</h5><p>Shopify, Woo, custom carts</p></div></div></div>
-    <div class="mt-5 glass-card p-4"><i class="fas fa-chart-line text-info"></i> Client success: 60% faster load times, 45% conversion increase.</div>
-  </div>
-
-  <!-- Digital Menus page -->
-  <div id="service-menus" class="service-detail-page container py-4">
-    <div class="mb-4"><button class="back-home-btn"><i class="fas fa-arrow-left me-2"></i>Back to Home</button></div>
-    <div class="text-center"><h1 class="display-5 fw-bold">Digital Menus: <span class="text-info">Interactive Ordering Experience.</span></h1><p>NFC & QR based smart menus with real-time updates and analytics.</p><button class="btn btn-cyber">Launch Digital Menu</button></div>
-    <div class="row g-4 mt-4"><div class="col-md-4"><div class="glass-card p-3"><i class="fas fa-qrcode text-info"></i><h5>QR/NFC Access</h5><p>Tap or scan, menu instantly loads.</p></div></div><div class="col-md-4"><div class="glass-card p-3"><i class="fas fa-sync-alt text-info"></i><h5>Live Updates</h5><p>Change prices/items remotely.</p></div></div><div class="col-md-4"><div class="glass-card p-3"><i class="fas fa-chart-simple text-info"></i><h5>Analytics Dashboard</h5><p>Track popular items & engagement.</p></div></div></div>
-    <div class="mt-5"><div class="glass-card p-3 d-flex gap-3"><i class="fas fa-store fs-1 text-info"></i><div><h5>Case Study: City Bistro</h5><p>+34% repeat orders after digital menu integration, reduced wait time.</p></div></div></div>
-  </div>
+  <p style="margin-top: 1rem; font-size: 0.7rem;">#RowdyCafe #TasteTheRowdy</p>
 </div>
-
-<!-- GLOBAL FOOTER -->
-<footer class="footer mt-5 py-5">
-  <div class="container">
-    <div class="row gy-4">
-      <div class="col-md-5"><h4 class="fw-bold"><i class="fas fa-meteor me-2"></i>A.S. Creative House</h4><p class="small text-secondary">Turning physical interactions into digital relationships — innovative solutions for modern brands.</p><div class="d-flex gap-3 fs-5 mt-3"><a href="#" class="text-info link-glow"><i class="fab fa-instagram"></i></a><a href="#" class="text-info"><i class="fab fa-twitter"></i></a><a href="#" class="text-info"><i class="fab fa-linkedin-in"></i></a><a href="#" class="text-info"><i class="fab fa-youtube"></i></a></div></div>
-      <div class="col-md-3"><h5>Quick Links</h5><ul class="list-unstyled"><li><a href="#" class="text-secondary text-decoration-none nav-footer">Contact</a></li><li><a href="#" class="text-secondary text-decoration-none">Portfolio</a></li><li><a href="#" class="text-secondary text-decoration-none">Privacy Policy</a></li><li><a href="#" class="text-secondary text-decoration-none">Terms of Service</a></li></ul></div>
-      <div class="col-md-4"><h5>Connect</h5><p class="small">hello@ascreative.com</p><p class="small">© 2024 A.S. Creative House. All rights reserved.</p></div>
-    </div>
-  </div>
+<footer>
+  © 2025 Rowdy Cafe — Break the rule, taste the rebellion.
 </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-  // DOM elements
-  const homeContainer = document.getElementById('homePageContainer');
-  const servicesWrapper = document.getElementById('servicesDetailWrapper');
-  const allServicePages = document.querySelectorAll('.service-detail-page');
-  const backBtns = document.querySelectorAll('.back-home-btn');
-  const serviceTriggers = document.querySelectorAll('.service-trigger');
-  const getStartedBtn = document.getElementById('getStartedBtn');
-  const navHome = document.getElementById('navHome');
-  const homeNavBtn = document.getElementById('homeNavBtn');
-  const navServices = document.getElementById('navServices');
+  // --------------------------------------------------------------
+  // COMPLETE MENU DATA (21 categories with items & images)
+  // --------------------------------------------------------------
+  const categoriesData = [
+    { name: "Korean Ramen", image: "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=500&auto=format", items: [{name:"Korean Spicy Veg Ramen", price:169},{name:"Korean Cheese Ramen", price:169},{name:"Korean Kimchi Ramen", price:169}] },
+    { name: "Pizza", image: "https://images.unsplash.com/photo-1513104890138-7c749659a591?w=500&auto=format", items: [{name:"Margherita Pizza", price:199},{name:"Peppy Paneer Pizza", price:249},{name:"Farmhouse Delight", price:279},{name:"Peri Peri Veg", price:269}] },
+    { name: "Tandoori Bhatti Se", image: "https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?w=500&auto=format", items: [{name:"Steam Platter (2pcs *6 Varieties)", price:215},{name:"Fried Platter (2pcs*6 Varieties)", price:245},{name:"Tandoori Soya Chaap", price:189}] },
+    { name: "Burger", image: "https://images.unsplash.com/photo-1571091718767-18b5b1457add?w=500&auto=format", items: [{name:"Veg Burger", price:75},{name:"Tandoori Burger", price:85},{name:"Peri Peri Burger", price:85}] },
+    { name: "Korean Corn Dog", image: "https://images.unsplash.com/photo-1626808642875-0aa545482dfb?w=500&auto=format", items: [{name:"Classic Cheese Corn Dog", price:149},{name:"Potato Corn Dog", price:169},{name:"Ramen Crunch Corn Dog", price:189},{name:"Half Cheese Half Sausage", price:179}] },
+    { name: "Platter", image: "https://images.unsplash.com/photo-1625938144755-6e0cff9905ab?w=500&auto=format", items: [{name:"Veg Crispy Platter", price:279},{name:"Mexican Fiesta Platter", price:299},{name:"Popcorn Platter", price:259}] },
+    { name: "French Fries", image: "https://images.unsplash.com/photo-1585109649139-366815a0d713?w=500&auto=format", items: [{name:"Salted Fries", price:99},{name:"Peri Peri Fries", price:119},{name:"Cheesy Fries", price:139},{name:"Chilli Cheese Fries", price:139}] },
+    { name: "Classic Momos", image: "https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?w=500&auto=format", items: [{name:"Veg Momo", price:75},{name:"Veg Peri Peri Momo", price:95},{name:"Veg Cheese Momo", price:115},{name:"Paneer Achari Momo", price:115},{name:"Paneer Peri Peri Momo", price:115},{name:"Pizza Momo", price:125},{name:"Steamed (6PC.)", price:75},{name:"Fried (6PC.)", price:85},{name:"Kurkure (6PC.)", price:105}] },
+    { name: "Saucy AF Momos", image: "https://images.unsplash.com/photo-1626082927389-6cd097cdd6a6?w=500&auto=format", items: [{name:"Kungfu Schezwan", price:130},{name:"Chilly Manchurian", price:130},{name:"Tandoori Boom Boom", price:130},{name:"Peri Peri Devil", price:130},{name:"Momo served in spicy broth", price:130}] },
+    { name: "Sizzler", image: "https://images.unsplash.com/photo-1551024601-bec78aea704b?w=500&auto=format", items: [{name:"Veg sizzler with noodles", price:259, desc:"Sizzling veg noodles & stir-fry"},{name:"Paneer Tikka Sizzler", price:299}] },
+    { name: "Pahadi Soup Momos", image: "https://images.unsplash.com/photo-1617692855025-3388336ea2d1?w=500&auto=format", items: [{name:"Pahadi Soup Momo (Masala broth)", price:135},{name:"Nepali Jhol Momo", price:130}] },
+    { name: "Sweet Waffles", image: "https://images.unsplash.com/photo-1590086782792-42dd2350140c?w=500&auto=format", items: [{name:"Dark Chocolate Waffle", price:139},{name:"Milk Chocolate Waffle", price:138},{name:"Oreo Waffle", price:149},{name:"Triple Chocolate", price:169},{name:"Dark & White Rowdy Nutella", price:189}] },
+    { name: "Dessert Shake", image: "https://images.unsplash.com/photo-1579954115545-a95591f28bfc?w=500&auto=format", items: [{name:"Oreo Shake", price:199},{name:"Nutella Shake", price:249},{name:"Kit Kat Shake", price:220},{name:"Brownie Shake", price:239}] },
+    { name: "Desserts", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=500&auto=format", items: [{name:"Chocolate Brownie", price:79},{name:"Sizzling Brownie Ice Cream", price:139}] },
+    { name: "Cold Coffee", image: "https://images.unsplash.com/photo-1517701604599-bb29b565090c?w=500&auto=format", items: [{name:"Classic Cold Coffee", price:129},{name:"Hazelnut Cold Coffee", price:169},{name:"Caramel Cold Coffee", price:169}] },
+    { name: "Ice Tea's", image: "https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=500&auto=format", items: [{name:"Lemon Ice Tea", price:119},{name:"Peach Ice Tea", price:119},{name:"Peach Passion Ice Tea", price:119},{name:"Mango Ice Tea", price:119}] },
+    { name: "Milky Boba Tea", image: "https://images.unsplash.com/photo-1558857563-ba0eab9468bb?w=500&auto=format", items: [{name:"Taro Bliss", price:199},{name:"Hongkong Fusion Classic Thai", price:149},{name:"Brown Sugar Boba", price:179}] },
+    { name: "Mojitos", image: "https://images.unsplash.com/photo-1600271886742-f049cd451bba?w=500&auto=format", items: [{name:"Classic Virgin Mojito", price:129},{name:"Blue Lagoon Mojito", price:129},{name:"Blueberry Mojito", price:129},{name:"Mango Mojito", price:129}] },
+    { name: "Fruit Milkshake", image: "https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=500&auto=format", items: [{name:"Mango Shake", price:179},{name:"Strawberry Shake", price:179},{name:"Blueberry Shake", price:209}] },
+    { name: "Bubble Tea", image: "https://images.unsplash.com/photo-1558857563-ba0eab9468bb?w=500&auto=format", items: [{name:"Strawberry Bliss", price:169},{name:"Berry Refresher", price:169},{name:"Blue Citrus", price:169},{name:"Mango Passion", price:169},{name:"Kiwi Punch", price:169},{name:"Lychee Lush", price:169}] },
+    { name: "Signature Mocktails", image: "https://images.unsplash.com/photo-1515290332139-78e5a372e255?w=500&auto=format", items: [{name:"Spicy Guava Fizz", price:169},{name:"Passion Fruit Sparkler", price:169},{name:"Watermelon Basil Smash", price:169},{name:"Mango Tango Cooler", price:149}] }
+  ];
 
-  function showHome() {
-    homeContainer.style.display = 'block';
-    servicesWrapper.style.display = 'none';
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+  // Helper to render menu items (handling extra desc if needed)
+  function renderItemRows(items) {
+    return items.map(item => {
+      let displayName = item.name;
+      if(item.desc) displayName = `${item.name} (${item.desc})`;
+      return `<div class="menu-item-row">
+                <span>${displayName}</span>
+                <span class="price">₹${item.price}</span>
+              </div>`;
+    }).join('');
   }
 
-  function showService(serviceId) {
-    // hide home, show wrapper
-    homeContainer.style.display = 'none';
-    servicesWrapper.style.display = 'block';
-    // hide all detail pages
-    allServicePages.forEach(page => page.style.display = 'none');
-    const targetPage = document.getElementById(`service-${serviceId}`);
-    if (targetPage) targetPage.style.display = 'block';
-    else console.warn('service not found');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+  // Build all categories into grid
+  function buildMenu() {
+    const grid = document.getElementById('menuGrid');
+    if(!grid) return;
+    grid.innerHTML = '';
+    categoriesData.forEach(cat => {
+      const card = document.createElement('div');
+      card.className = 'category-card';
+      // items array
+      const itemsHtml = renderItemRows(cat.items);
+      card.innerHTML = `
+        <img class="card-img" src="${cat.image}" alt="${cat.name}" loading="lazy" onerror="this.src='https://placehold.co/600x400?text=Rowdy+Eats'">
+        <div class="card-heading">${cat.name}</div>
+        <div class="menu-items">
+          ${itemsHtml}
+        </div>
+      `;
+      grid.appendChild(card);
+    });
   }
 
-  // attach triggers for each service card
-  serviceTriggers.forEach(card => {
-    card.addEventListener('click', (e) => {
-      const service = card.getAttribute('data-service');
-      if (service) showService(service);
+  // Build navigation links for sidebar
+  function buildNavLinks() {
+    const navList = document.getElementById('menuNavList');
+    if(!navList) return;
+    navList.innerHTML = '';
+    categoriesData.forEach((cat, idx) => {
+      const li = document.createElement('li');
+      const link = document.createElement('a');
+      link.href = '#';
+      link.textContent = cat.name;
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        // scroll to section (by category card order)
+        const cards = document.querySelectorAll('.category-card');
+        if(cards[idx]) {
+          cards[idx].scrollIntoView({ behavior: 'smooth', block: 'start' });
+          closeSidebar();
+        }
+      });
+      li.appendChild(link);
+      navList.appendChild(li);
+    });
+    // add extra dummy or exact same as categories
+  }
+
+  // Toggle sidebar logic
+  const sidebar = document.getElementById('sidebarMenu');
+  const overlay = document.getElementById('overlayBlur');
+  const hamburger = document.getElementById('hamburgerBtn');
+  const closeBtn = document.getElementById('closeSidebar');
+
+  function openSidebar() {
+    sidebar.classList.add('open');
+    overlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeSidebar() {
+    sidebar.classList.remove('open');
+    overlay.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+  if(hamburger) hamburger.addEventListener('click', openSidebar);
+  if(closeBtn) closeBtn.addEventListener('click', closeSidebar);
+  if(overlay) overlay.addEventListener('click', closeSidebar);
+
+  // ORDER NOW button action (alert / delivery)
+  const orderBtn = document.getElementById('orderNowBtn');
+  if(orderBtn) {
+    orderBtn.addEventListener('click', () => {
+      alert("🔥 Let's get rowdy! 🛵 Your order will be delivered soon. (Demo interaction)");
+    });
+  }
+
+  // smooth initial load + handle viewport, adjust any image fallback
+  document.addEventListener('DOMContentLoaded', () => {
+    buildMenu();
+    buildNavLinks();
+    // mobile/desktop scroll enhancements
+    const allLinks = document.querySelectorAll('.sidebar-nav a');
+    allLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        // already handled by dynamic build but ensure close anyways
+        if(link.getAttribute('href') === '#') e.preventDefault();
+        setTimeout(closeSidebar, 100);
+      });
     });
   });
 
-  backBtns.forEach(btn => {
-    btn.addEventListener('click', showHome);
-  });
-
-  // get started scrolls to services section if home visible
-  getStartedBtn.addEventListener('click', () => {
-    if (homeContainer.style.display !== 'none') {
-      document.getElementById('servicesMainSection').scrollIntoView({ behavior: 'smooth' });
-    } else {
-      showHome();
-      setTimeout(()=> document.getElementById('servicesMainSection').scrollIntoView({ behavior: 'smooth' }), 100);
+  // add small fix for sizzler description rendering (already handled renderItemRows with improved presentation)
+  // patch sizzler category to add proper description (update data for sizzler first item specifically)
+  const sizzlerIndex = categoriesData.findIndex(c => c.name === "Sizzler");
+  if(sizzlerIndex !== -1) {
+    if(categoriesData[sizzlerIndex].items[0] && categoriesData[sizzlerIndex].items[0].name === "Veg sizzler with noodles") {
+      categoriesData[sizzlerIndex].items[0].desc = "Sizzling noodles & veggies";
     }
-  });
-
-  navHome.addEventListener('click', (e) => { e.preventDefault(); showHome(); });
-  homeNavBtn.addEventListener('click', (e) => { e.preventDefault(); showHome(); });
-  navServices.addEventListener('click', (e) => {
-    e.preventDefault();
-    if (homeContainer.style.display === 'none') showHome();
-    setTimeout(() => document.getElementById('servicesMainSection').scrollIntoView({ behavior: 'smooth' }), 80);
-  });
-  document.getElementById('navContact')?.addEventListener('click', (e) => {
-    e.preventDefault();
-    if (homeContainer.style.display === 'none') showHome();
-    setTimeout(() => document.querySelector('footer').scrollIntoView({ behavior: 'smooth' }), 80);
-  });
-
-  // init visibility
-  showHome();
-  // extra: add Intersection Observer scroll animations (fade-in)
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if(entry.isIntersecting) entry.target.classList.add('show');
-    });
-  }, { threshold: 0.1 });
-  document.querySelectorAll('.service-card, .benefit-card, .glass-card').forEach(el => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(20px)';
-    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-    observer.observe(el);
-  });
+  }
+  // final rebuild to capture desc lines
+  function rebuildWithDesc() {
+    buildMenu();  // rebuild to incorporate any desc later
+  }
+  rebuildWithDesc();
+  // For extra smoothness, remove any duplicate
   window.addEventListener('load', () => {
-    document.querySelectorAll('.service-card, .benefit-card, .glass-card').forEach(el => {
-      if (el.getBoundingClientRect().top < window.innerHeight) {
-        el.style.opacity = '1';
-        el.style.transform = 'translateY(0)';
-      }
+    document.querySelectorAll('.card-img').forEach(img => {
+      img.addEventListener('error', () => {
+        img.src = 'https://placehold.co/600x400/1a1a1a/f5b301?text=Rowdy+Food';
+      });
     });
   });
-  const obsCallback = (entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.style.opacity = '1';
-        entry.target.style.transform = 'translateY(0)';
-      }
-    });
-  };
-  const newObserver = new IntersectionObserver(obsCallback, { threshold: 0.1 });
-  document.querySelectorAll('.service-card, .benefit-card, .glass-card').forEach(el => newObserver.observe(el));
 </script>
 </body>
 </html>
